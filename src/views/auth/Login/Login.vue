@@ -54,15 +54,6 @@ export default {
   //   });
   // },
   methods: {
-    userNameError() {
-      const { getFieldError, isFieldTouched } = this.form;
-      return isFieldTouched("userName") && getFieldError("userName");
-    },
-    // Only show error after a field is touched.
-    passwordError() {
-      const { getFieldError, isFieldTouched } = this.form;
-      return isFieldTouched("password") && getFieldError("password");
-    },
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields(err => {
