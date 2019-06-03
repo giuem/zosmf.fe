@@ -5,22 +5,10 @@
       :trigger="null"
       collapsible
       v-model="collapsed"
+      :width="240"
     >
       <div class="logo"><span>z/OSMF</span></div>
-      <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
-        <a-menu-item key="1">
-          <a-icon type="user" />
-          <span>nav 1</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="video-camera" />
-          <span>nav 2</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <a-icon type="upload" />
-          <span>nav 3</span>
-        </a-menu-item>
-      </a-menu>
+      <SidebarMenu />
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="display: flex; background: #fff; padding: 0">
@@ -42,8 +30,7 @@
         :style="{
           margin: '24px 16px',
           padding: '24px',
-          background: '#fff',
-          minHeight: '280px'
+          background: '#fff'
         }"
       >
         <router-view />
@@ -53,13 +40,18 @@
 </template>
 
 <script>
+import SidebarMenu from "./SidebarMenu";
 export default {
   name: "DashBoardLayout",
+  components: {
+    SidebarMenu
+  },
   data() {
     return {
       collapsed: false
     };
   },
+
   computed: {
     username() {
       return this.$store.state.user.username;
