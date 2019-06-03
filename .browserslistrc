@@ -1,2 +1,4 @@
 > 1%
 last 2 versions
+not op_mini all
+not IE < 11
