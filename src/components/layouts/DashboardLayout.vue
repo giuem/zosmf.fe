@@ -30,7 +30,7 @@
           @click="() => (collapsed = !collapsed)"
         />
         <a-dropdown style="margin-left: auto; margin-right: 1em;">
-          <a>ST013</a>
+          <a>{{ username }}</a>
           <a-menu slot="overlay">
             <a-menu-item>
               <a href="javascript:;">退出登录</a>
@@ -46,7 +46,7 @@
           minHeight: '280px'
         }"
       >
-        Content
+        <router-view />
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -59,6 +59,11 @@ export default {
     return {
       collapsed: false
     };
+  },
+  computed: {
+    username() {
+      return this.$store.state.user.username;
+    }
   }
 };
 </script>
