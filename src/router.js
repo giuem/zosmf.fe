@@ -22,12 +22,10 @@ export default new Router({
     },
     {
       path: "/dashboard",
-      name: "dashboard",
       component: DashBoardLayout,
       children: [
         {
-          path: "demo",
-          name: "racfDEMO",
+          path: "racf/demo",
           component: RacfDemo
         }
       ]
@@ -42,6 +40,10 @@ export default new Router({
           component: Login
         }
       ]
+    },
+    {
+      path: "*",
+      component: () => import("./views/notfound")
     }
   ]
 });
