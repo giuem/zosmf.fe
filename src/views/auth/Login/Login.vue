@@ -5,7 +5,7 @@
       <a-form-item>
         <a-input
           v-decorator="[
-            'userName',
+            'account',
             {
               rules: [{ required: true, message: '用户名不能为空' }]
             }
@@ -32,7 +32,13 @@
         </a-input>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" size="large" block>
+        <a-button
+          type="primary"
+          html-type="submit"
+          size="large"
+          block
+          :loading="isLoading"
+        >
           登录
         </a-button>
       </a-form-item>
@@ -41,10 +47,14 @@
 </template>
 
 <script>
+import Axios from "axios";
+import { Modal } from "ant-design-vue";
+
 export default {
   data() {
     return {
-      form: this.$form.createForm(this)
+      form: this.$form.createForm(this),
+      isLoading: false
     };
   },
   // mounted() {
@@ -56,9 +66,39 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      this.form.validateFields(err => {
+      this.form.validateFields(async err => {
         if (err) return;
+        this.doLogin();
       });
+    },
+
+    async doLogin() {
+      this.isLoading = true;
+
+      try {
+        const user = this.form.getFieldsValue();
+        const response = await Axios.post("/api/login", user);
+        switch (response.status) {
+          case 200:
+            this.$store.commit("user/setUser", user);
+            this.$router.push("/");
+            return;
+          case 401:
+            Modal.error({
+              title: "登录失败",
+              content: "用户名或密码错误",
+              centered: true
+            });
+        }
+      } catch (error) {
+        Modal.error({
+          title: "登录失败",
+          content: error.message,
+          centered: true
+        });
+      } finally {
+        this.isLoading = false;
+      }
     }
   }
 };

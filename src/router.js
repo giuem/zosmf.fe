@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
-// import Home from "./views/Home.vue";
+
+import store from "./store";
 
 // import layout
 import DashBoardLayout from "./components/layouts/DashboardLayout.vue";
@@ -12,7 +13,7 @@ import RacfDemo from "./views/dashboard/racf/Demo";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -37,6 +38,7 @@ export default new Router({
       children: [
         {
           path: "login",
+          name: "login",
           component: Login
         }
       ]
@@ -47,3 +49,19 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if (store.getters["user/isLogin"]) {
+    if (to.name === "login") {
+      next("/");
+    }
+  } else {
+    if (to.name !== "login") {
+      console.log(1);
+      next("/auth/login");
+    }
+  }
+  next();
+});
+
+export default router;
