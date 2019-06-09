@@ -80,7 +80,7 @@ export default {
         const response = await Axios.post("/api/login", user);
         switch (response.status) {
           case 200:
-            this.$store.commit("user/setUser", user);
+            this.$store.dispatch("user/login", user);
             this.$router.push("/");
             return;
           case 401:

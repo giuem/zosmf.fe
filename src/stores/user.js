@@ -1,5 +1,14 @@
+const SESSION_USER = "zosmf_user";
+
+let username = "";
+try {
+  username = JSON.parse(sessionStorage.getItem(SESSION_USER)).account;
+} catch (error) {
+  // ignore error
+}
+
 const state = {
-  username: ""
+  username
 };
 
 const getters = {
@@ -9,8 +18,15 @@ const getters = {
 };
 
 const mutations = {
-  setUser(state, user) {
+  SET_USER(state, user) {
+    sessionStorage.setItem(SESSION_USER, JSON.stringify(user));
     state.username = user.account;
+  }
+};
+
+const actions = {
+  login({ commit }, user) {
+    commit("SET_USER", user);
   }
 };
 
@@ -18,5 +34,6 @@ export default {
   namespaced: true,
   state,
   getters,
-  mutations
+  mutations,
+  actions
 };
