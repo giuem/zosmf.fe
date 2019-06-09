@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="layout">
+  <a-layout class="layout" :class="{ collapsed: collapsed }">
     <a-layout-sider
       class="sidebar"
       :trigger="null"
@@ -87,6 +87,11 @@ export default {
 .layout {
   min-height: 100vh;
   margin-left: 240px;
+  transition: margin-left 0.2s;
+
+  &.collapsed {
+    margin-left: 80px;
+  }
 }
 
 .sidebar {
