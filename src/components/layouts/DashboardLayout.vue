@@ -86,10 +86,13 @@ export default {
 
 .layout {
   min-height: 100vh;
+  margin-left: 240px;
 }
 
 .sidebar {
   height: 100vh;
   overflow: hidden;
+  position: fixed;
+  left: 0;
 }
 </style>
