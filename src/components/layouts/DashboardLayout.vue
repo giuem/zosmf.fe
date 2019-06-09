@@ -19,10 +19,8 @@
         />
         <a-dropdown style="margin-left: auto; margin-right: 1em;">
           <a>{{ username }}</a>
-          <a-menu slot="overlay">
-            <a-menu-item>
-              <a href="javascript:;">退出登录</a>
-            </a-menu-item>
+          <a-menu slot="overlay" @click="handleClick">
+            <a-menu-item key="logout">退出登录</a-menu-item>
           </a-menu>
         </a-dropdown>
       </a-layout-header>
@@ -55,6 +53,15 @@ export default {
   computed: {
     username() {
       return this.$store.state.user.username;
+    }
+  },
+
+  methods: {
+    handleClick({ key }) {
+      if (key === "logout") {
+        this.$store.dispatch("user/logout");
+        this.$router.push("/auth/login");
+      }
     }
   }
 };

@@ -6,6 +6,7 @@
     <a-modal
       title="添加用户"
       :visible="visible"
+      :confirmLoading="isLoading"
       @cancel="changeVisible(false)"
       @ok="handleSubmit"
     >
@@ -31,6 +32,16 @@
             ]"
           ></a-input>
         </a-form-item>
+        <a-form-item label="OWNER">
+          <a-input
+            v-decorator="[
+              'owner',
+              {
+                rules: [{ required: true, message: '请输入 OWNER' }]
+              }
+            ]"
+          ></a-input>
+        </a-form-item>
       </a-form>
     </a-modal>
   </div>
@@ -41,7 +52,8 @@ export default {
   data() {
     return {
       visible: false,
-      form: this.$form.createForm(this)
+      form: this.$form.createForm(this),
+      isLoading: false
     };
   },
 
@@ -55,6 +67,12 @@ export default {
         if (err) return;
         // login
         console.log(values);
+        this.isLoading = true;
+        setTimeout(() => {
+          this.visible = false;
+          this.isLoading = false;
+          this.$message.success("添加成功");
+        }, 2000);
       });
     }
   }
