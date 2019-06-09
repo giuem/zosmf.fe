@@ -10,6 +10,7 @@ import AuthLayout from "./components/layouts/AuthLayout.vue";
 // import pages
 import Login from "./views/auth/Login";
 import RacfDemo from "./views/dashboard/racf/Demo";
+import RacfUserDemo from "./views/dashboard/racf/UserDemo";
 
 Vue.use(Router);
 
@@ -28,6 +29,10 @@ const router = new Router({
         {
           path: "racf/demo",
           component: RacfDemo
+        },
+        {
+          path: "racf/user-demo",
+          component: RacfUserDemo
         }
       ]
     },

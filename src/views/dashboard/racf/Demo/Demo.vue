@@ -77,7 +77,7 @@ export default {
 pre {
   background: #eee;
   padding: 1em;
-  margin: 1em 0;
+  margin: 1em 0 !important;
 
   border: 1px solid #ddd;
 }

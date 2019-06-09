@@ -11,6 +11,7 @@
         <a-icon type="safety" /><span>安全管理（RACF）</span>
       </span>
       <a-menu-item key="/dashboard/racf/demo">Demo</a-menu-item>
+      <a-menu-item key="/dashboard/racf/user-demo">用户管理 Demo</a-menu-item>
     </a-sub-menu>
     <a-sub-menu key="/dashboard/dfsms">
       <span slot="title">
