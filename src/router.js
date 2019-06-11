@@ -24,6 +24,10 @@ const router = new Router({
       component: DashBoardLayout,
       children: [
         {
+          path: "reports",
+          component: () => import("@/pages/dashboard/reports")
+        },
+        {
           path: "racf/demo",
           component: () => import("@/pages/dashboard/racf/demo")
         },

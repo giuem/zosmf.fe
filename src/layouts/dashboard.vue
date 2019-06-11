@@ -17,19 +17,23 @@
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="() => (collapsed = !collapsed)"
         />
-        <a-dropdown style="margin-left: auto; margin-right: 1em;">
-          <a>{{ username }}</a>
-          <a-menu slot="overlay" @click="handleClick">
-            <a-menu-item key="logout">退出登录</a-menu-item>
-          </a-menu>
-        </a-dropdown>
+        <div style="margin-left: auto; margin-right: 1em;">
+          <a-dropdown>
+            <a>{{ username }}</a>
+            <a-menu slot="overlay" @click="handleClick">
+              <a-menu-item key="reports">我的实验报告</a-menu-item>
+              <a-menu-item key="logout">退出登录</a-menu-item>
+            </a-menu>
+          </a-dropdown>
+        </div>
       </a-layout-header>
       <a-layout-content
         :style="{
           margin: '24px 16px',
           padding: '24px',
           background: '#fff',
-          height: 'calc(100vh - 64px - 64px)'
+          height: 'calc(100vh - 64px - 64px)',
+          overflow: 'auto'
         }"
       >
         <router-view />
@@ -62,6 +66,8 @@ export default {
       if (key === "logout") {
         this.$store.dispatch("user/logout");
         this.$router.push("/auth/login");
+      } else if (key === "reports") {
+        this.$router.push("/dashboard/reports");
       }
     }
   }

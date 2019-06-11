@@ -4,7 +4,7 @@
       <LabContent :content="content" />
     </template>
     <template slot="right">
-      <LabReport>
+      <LabReport name="步骤 1">
         <a-form type="vertical" @submit="handleSubmit">
           <a-form-item label="What groups are you connected to?" :colon="false">
             <a-input></a-input>
@@ -29,10 +29,9 @@
               <a-button style="margin-right: 10px">上一步</a-button>
               <a-button>下一步</a-button>
             </span>
-
-            <a-button style="float: right" type="primary" html-type="submit"
-              >提交</a-button
-            >
+            <a-button style="float: right" type="primary" html-type="submit">
+              提交
+            </a-button>
           </div>
         </a-form>
       </LabReport>
