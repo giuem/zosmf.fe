@@ -49,6 +49,7 @@
 <script>
 import { Modal } from 'ant-design-vue'
 export default {
+  layout: 'auth',
   auth: false,
   data() {
     return {
