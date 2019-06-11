@@ -1,6 +1,6 @@
 const SESSION_USER = "zosmf_user";
 
-let username = "";
+let username = "1";
 try {
   username = JSON.parse(sessionStorage.getItem(SESSION_USER)).account;
 } catch (error) {

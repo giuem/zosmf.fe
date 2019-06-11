@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import SidebarMenu from "./SidebarMenu";
+import SidebarMenu from "@/components/SidebarMenu";
 export default {
   name: "DashBoardLayout",
   components: {

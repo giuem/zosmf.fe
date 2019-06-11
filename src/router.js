@@ -4,13 +4,10 @@ import Router from "vue-router";
 import store from "./store";
 
 // import layout
-import DashBoardLayout from "./components/layouts/DashboardLayout.vue";
-import AuthLayout from "./components/layouts/AuthLayout.vue";
+import DashBoardLayout from "@/layouts/dashboard.vue";
+import AuthLayout from "@/layouts/auth.vue";
 
 // import pages
-import Login from "./views/auth/Login";
-import RacfDemo from "./views/dashboard/racf/Demo";
-import RacfUserDemo from "./views/dashboard/racf/UserDemo";
 
 Vue.use(Router);
 
@@ -28,11 +25,7 @@ const router = new Router({
       children: [
         {
           path: "racf/demo",
-          component: RacfDemo
-        },
-        {
-          path: "racf/user-demo",
-          component: RacfUserDemo
+          component: () => import("@/pages/dashboard/racf/demo")
         }
       ]
     },
@@ -44,13 +37,13 @@ const router = new Router({
         {
           path: "login",
           name: "login",
-          component: Login
+          component: () => import("@/pages/auth/login")
         }
       ]
     },
     {
       path: "*",
-      component: () => import("./views/notfound")
+      component: () => import("@/pages/404")
     }
   ]
 });
