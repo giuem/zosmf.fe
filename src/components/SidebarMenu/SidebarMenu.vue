@@ -3,7 +3,7 @@
     theme="dark"
     mode="inline"
     @click="handleMenuClick"
-    :defaultSelectedKeys="defaultSelectedKeys"
+    :selectedKeys="selectedKeys"
     :defaultOpenKeys="defaultOpenKeys"
   >
     <a-sub-menu v-for="menu in menuConfig" :key="'/dashboard/' + menu.path">
@@ -27,7 +27,7 @@ export default {
   name: "SidebarMenu",
   data() {
     return {
-      defaultSelectedKeys: [this.$route.path],
+      selectedKeys: [this.$route.path],
       defaultOpenKeys: [
         this.$route.path
           .split("/")
@@ -36,6 +36,11 @@ export default {
       ],
       menuConfig
     };
+  },
+  watch: {
+    $route(to) {
+      this.selectedKeys = [to.path];
+    }
   },
   methods: {
     handleMenuClick(e) {
