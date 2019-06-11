@@ -28,7 +28,8 @@
         :style="{
           margin: '24px 16px',
           padding: '24px',
-          background: '#fff'
+          background: '#fff',
+          height: 'calc(100vh - 64px - 64px)'
         }"
       >
         <router-view />

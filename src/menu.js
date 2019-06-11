@@ -4,7 +4,11 @@ export default [
     name: "安全管理（RACF）",
     path: "racf",
     icon: "safety",
-    children: [{ name: "Demo", path: "demo" }]
+    children: [
+      // { name: "Demo", path: "demo" },
+      { name: "实验介绍", path: "intro" },
+      { name: "Lab1", path: "lab1" }
+    ]
   },
   {
     name: "存储管理（DFSMS）",
