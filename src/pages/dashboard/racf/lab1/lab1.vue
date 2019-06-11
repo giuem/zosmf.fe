@@ -26,7 +26,7 @@
           </a-form-item>
           <div>
             <span>
-              <a-button style="margin-right: 10px">上一步</a-button>
+              <a-button style="margin-right: 10px" disabled>上一步</a-button>
               <a-button>下一步</a-button>
             </span>
             <a-button style="float: right" type="primary" html-type="submit">
