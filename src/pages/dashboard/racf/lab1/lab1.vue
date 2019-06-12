@@ -29,9 +29,14 @@
               <a-button style="margin-right: 10px" disabled>上一步</a-button>
               <a-button>下一步</a-button>
             </span>
-            <a-button style="float: right" type="primary" html-type="submit">
-              提交
-            </a-button>
+            <span style="float: right">
+              <a-button style="margin-right: 10px" type="primary">
+                保存
+              </a-button>
+              <a-button type="primary" html-type="submit">
+                提交
+              </a-button>
+            </span>
           </div>
         </a-form>
       </LabReport>
