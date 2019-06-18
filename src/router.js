@@ -74,10 +74,6 @@ const router = new Router({
         {
           path: "dfsms/lab7",
           component: () => import("@/pages/dashboard/dfsms/lab7")
-        },
-        {
-          path: "dfsms/lab8",
-          component: () => import("@/pages/dashboard/dfsms/lab8")
         }
       ]
     },
