@@ -7,7 +7,9 @@ export default [
     children: [
       // { name: "Demo", path: "demo" },
       { name: "实验介绍", path: "intro" },
-      { name: "实验一", path: "lab1" }
+      { name: "实验一", path: "lab1" },
+      { name: "实验二", path: "lab2" },
+      { name: "实验三", path: "lab3" }
     ]
   },
   {

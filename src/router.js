@@ -40,6 +40,14 @@ const router = new Router({
           component: () => import("@/pages/dashboard/racf/lab1")
         },
         {
+          path: "racf/lab2",
+          component: () => import("@/pages/dashboard/racf/lab2")
+        },
+        {
+          path: "racf/lab3",
+          component: () => import("@/pages/dashboard/racf/lab3")
+        },
+        {
           path: "dfsms/demo",
           component: () => import("@/pages/dashboard/dfsms/demo")
         },
