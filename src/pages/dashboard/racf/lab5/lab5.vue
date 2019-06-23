@@ -59,7 +59,7 @@ import LabLayout from "@/components/LabLayout";
 import LabContent from "@/components/LabContent";
 import LabReport from "@/components/LabReport";
 import Console from "@/components/Console";
-import content from "./lab1.md";
+import content from "./lab5.md";
 
 export default {
   components: {
@@ -73,28 +73,32 @@ export default {
       content,
       fuckingnow: 0,
       steps: [
-        [],
         [
-          "What groups are you connected to?",
-          "Do you have any user attributes?",
-          "Do you have some class authorization?",
-          "Do you have any connect attributes to RACFLAB?"
+          "以TSOxx04登陆（FUNxxPRD组成员），创建 RESxxPRD.PROD.STUFF 数据集，是否成功？"
         ],
         [
-          "定义DIVxxADM 用户管理组（相当于公司人事部门），RACF命令",
-          "定义DIVxxFUN 功能组（相当于公司各职能部门），后继实验将在该组下定义各个子功能组，RACF命令：",
-          "定义DIVxxRES 资源组（为有机组织和保护系统资源—包括数据集/CICS交易/系统和用户程序等资源—而设立的组），后继实验将在该组下定义各个子资源组，RACF命令："
+          "以TSOxx03登陆（RESxxPRD组CREATE特权人员，即数据管理人员），为 RESxxPRD.DATA 创建一个全匹配的PROFILE进行保护"
         ],
         [
-          "定义FUNxxPRD 功能组，该组将用于对生产系统数据集(Production Data Sets)的访问进行集中授权（即如果该组对生产系统数据集有访问权限，该组的成员将自动继承这一权限）RACF命令：",
-          "定义FUNxxTST 功能组，该组将用于对测试系统数据集(Test Data Sets)的访问进行集中授权（即如果该组对测试系统数据集有访问权限，该组的成员将自动继承这一权限）"
+          "以TSOxx03登陆，把数据集PROFILE的Warning状态打开：把 RESxxTST.PROFILE 的Warning状态打开"
         ],
         [
-          "定义RESxxPRD 资源组，该组将用于保护生产系统的数据集。RACF命令：",
-          "定义RESxxTST 资源组，该组将用于保护测试系统的数据集。RACF命令："
+          "以TSOxx04登陆，浏览‘RESxxTST.DATA’数据集，是否成功，是否收到什么系统信息？"
         ],
-        ["利用RACF命令(Search)或者RACF面板查找组Profile。RACF命令："],
-        ["实验总结"]
+        ["以TSOxx03登陆，把‘RESxxTST.’PROFILE的Warning状态关闭"],
+        ["以TSOxx04登陆，浏览‘RESxxTST.DATA’数据集，是否成功？"],
+        ["RACF代码"],
+        [
+          "检测哪一个PROFILE在保护‘RESxxPRD.NEWAPPL.FINANCE.DATA’和‘RESxxPRD.NEWAPPL.HR.DATA’"
+        ],
+        ["检测一个Generic PROFILE  RESxxPRD. 保护了那些数据集"],
+        [
+          "一个组的group-special用户或者Create/Connect/Join用户是否能够直接访问（比如新建/更新）组文件？"
+        ],
+        [
+          "一个组的group-special用户或者Create用户是对数据集的Profile有操作权限，还是对数据集本身有操作权限？"
+        ],
+        ["总结本次实验体会及建议"]
       ]
     };
   },

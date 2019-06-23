@@ -59,7 +59,7 @@ import LabLayout from "@/components/LabLayout";
 import LabContent from "@/components/LabContent";
 import LabReport from "@/components/LabReport";
 import Console from "@/components/Console";
-import content from "./lab1.md";
+import content from "./lab2.md";
 
 export default {
   components: {
@@ -73,28 +73,33 @@ export default {
       content,
       fuckingnow: 0,
       steps: [
-        [],
         [
-          "What groups are you connected to?",
-          "Do you have any user attributes?",
-          "Do you have some class authorization?",
-          "Do you have any connect attributes to RACFLAB?"
+          "新增 TSOxx01  for user Janet Smith",
+          "新增 TSOxx02  for user Robert Anderson",
+          "新增 TSOxx03  for user Leslie Brown",
+          "新增 TSOxx04  for user Arthur Fielding",
+          "新增 TSOxx05  for user Susan Johnson"
+        ],
+        ["为 Janet Smith(TSOxx01) 指定一个新的临时密码的RACF命令?"],
+        ["将 Arthur Fielding(TSOxx04)的帐号挂起，RACF命令是什么"],
+        [
+          "Arthur Fielding(TSOxx04)出差回来，希望能够继续使用以前的帐号，RACF命令是什么"
+        ],
+        ["请设置挂起日期为实验的第二天，启用日期为1个月后"],
+        ["查看是否生效，考虑如何撤销"],
+        ["使用Search命令查找以上新建的用户Profile"],
+        [
+          "系统规定密码多长时间更换一次？",
+          "系统记录过去的密码吗？如果记录，记录多少个？",
+          "在密码过期之前系统会发送警告信息给用户吗？                                                                           ",
+          "系统有规定密码设置规则吗？"
         ],
         [
-          "定义DIVxxADM 用户管理组（相当于公司人事部门），RACF命令",
-          "定义DIVxxFUN 功能组（相当于公司各职能部门），后继实验将在该组下定义各个子功能组，RACF命令：",
-          "定义DIVxxRES 资源组（为有机组织和保护系统资源—包括数据集/CICS交易/系统和用户程序等资源—而设立的组），后继实验将在该组下定义各个子资源组，RACF命令："
+          "将用户Arthur Fielding(TSOxx04)连接到组FUNxxPRD，实现其对生产数据集的访问",
+          "将用户Susan Johnson (TSOxx05)连接到组FUNxxTST，实现其对测试数据集的访问"
         ],
-        [
-          "定义FUNxxPRD 功能组，该组将用于对生产系统数据集(Production Data Sets)的访问进行集中授权（即如果该组对生产系统数据集有访问权限，该组的成员将自动继承这一权限）RACF命令：",
-          "定义FUNxxTST 功能组，该组将用于对测试系统数据集(Test Data Sets)的访问进行集中授权（即如果该组对测试系统数据集有访问权限，该组的成员将自动继承这一权限）"
-        ],
-        [
-          "定义RESxxPRD 资源组，该组将用于保护生产系统的数据集。RACF命令：",
-          "定义RESxxTST 资源组，该组将用于保护测试系统的数据集。RACF命令："
-        ],
-        ["利用RACF命令(Search)或者RACF面板查找组Profile。RACF命令："],
-        ["实验总结"]
+        ["使用什么RACF命令可以验证用户是否关联到组？"],
+        ["总结本次实验体会及建议"]
       ]
     };
   },

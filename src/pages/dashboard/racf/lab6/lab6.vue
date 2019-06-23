@@ -59,7 +59,7 @@ import LabLayout from "@/components/LabLayout";
 import LabContent from "@/components/LabContent";
 import LabReport from "@/components/LabReport";
 import Console from "@/components/Console";
-import content from "./lab1.md";
+import content from "./lab6.md";
 
 export default {
   components: {
@@ -73,28 +73,49 @@ export default {
       content,
       fuckingnow: 0,
       steps: [
-        [],
         [
-          "What groups are you connected to?",
-          "Do you have any user attributes?",
-          "Do you have some class authorization?",
-          "Do you have any connect attributes to RACFLAB?"
+          "什么给你权限让你能够为 RACF 定义新的 User Profile?",
+          "是否足以定义TSO段?",
+          "什么让你能定义 profiles 去控制 TSO 用户的登录过程?",
+          "是什么让您能够定义 profile 来控制对帐号的访问?"
         ],
         [
-          "定义DIVxxADM 用户管理组（相当于公司人事部门），RACF命令",
-          "定义DIVxxFUN 功能组（相当于公司各职能部门），后继实验将在该组下定义各个子功能组，RACF命令：",
-          "定义DIVxxRES 资源组（为有机组织和保护系统资源—包括数据集/CICS交易/系统和用户程序等资源—而设立的组），后继实验将在该组下定义各个子资源组，RACF命令："
+          "在DIVxxFUN下创建子组FUNxxAP",
+          "在DIVxxFUN下创建子组FUNxxSP",
+          "在DIVxxRES下创建子组RESxxTSO，用以管理TSO资源授权"
+        ],
+        ["新增SP用户TSOxx06", "新增AP用户TSOxx07"],
+        ["为TSO用户创建一个新的登陆过程PROC#Sxx和PROC#Axx"],
+        ["测试TSOxx06和TSOxx07登陆TSO，成功吗？出现什么信息？"],
+        [
+          "创建通用资源TSOPROC的RPOFILE，保护AP和SP的TSO登陆过程",
+          "浏览PROC#Sxx和PROC#Axx PROFILE，它们用于保护不同的TSO登陆服务"
+        ],
+        ["刷新TSOPROC类在内存中的Profile"],
+        [
+          "创建RPOFILE：ACCT#Sxx 该ACCTNUM为SP用户组提供TSO登陆服务",
+          "创建PROFILE：ACCT#Axx 该ACCTNUM为AP用户组提供TSO登陆服务",
+          "浏览PROFILE：ACCT#Sxx和ACCT#Axx"
+        ],
+        ["查看SP和AP用户是否拥有提交JCL作业的权利"],
+        ["保护TSOxx06的用户数据集", "保护TSOxx07的用户数据集"],
+        [
+          "为TSOxx06创建别名",
+          "测试是否成功",
+          "为TSOxx07创建别名",
+          "测试是否成功"
         ],
         [
-          "定义FUNxxPRD 功能组，该组将用于对生产系统数据集(Production Data Sets)的访问进行集中授权（即如果该组对生产系统数据集有访问权限，该组的成员将自动继承这一权限）RACF命令：",
-          "定义FUNxxTST 功能组，该组将用于对测试系统数据集(Test Data Sets)的访问进行集中授权（即如果该组对测试系统数据集有访问权限，该组的成员将自动继承这一权限）"
+          "以TSOxx06和TSOxx07登陆TSO，测试是否成功",
+          "在登陆过程中，删除TSOPROC和ACCTNUM",
+          "在登陆过程中，键入不存在的TSOPROC和ACCTNUM",
+          "在登陆过程中，输入Region大小值大于4096，或者小于4096",
+          "以yourid登陆TSO，删除TSOxx06用户RPOFILE的TSO段，然后再尝试以TSOxx06登陆，看系统怎么反应？",
+          "为TSOxx06重新赋值TSO段",
+          "以yourid登陆TSO，取消TSOxx07用户RPOFILE的TSOPROC赋值或者ACCTNUM赋值，然后再尝试以TSOxx07登陆，看系统怎么反应？"
         ],
-        [
-          "定义RESxxPRD 资源组，该组将用于保护生产系统的数据集。RACF命令：",
-          "定义RESxxTST 资源组，该组将用于保护测试系统的数据集。RACF命令："
-        ],
-        ["利用RACF命令(Search)或者RACF面板查找组Profile。RACF命令："],
-        ["实验总结"]
+        ["如果想为TSO资源的保护指定一个管理员，如何操作比较简单高效？"],
+        ["总结本次实验体会及建议"]
       ]
     };
   },
