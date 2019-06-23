@@ -22,9 +22,7 @@
 
 完成实验报告
 
-## 实验步骤
-
-### 步骤1：新建用户
+## 步骤1：新建用户
 
 1.1 在不太了解用户需要什么权限的情况下，一般只给出最低权限，利用RACF命令或面板完成以下设置
 
@@ -36,7 +34,7 @@
 
 （4） 新增以下用户：
 
-| 用户    | 目的                     |
+| 账号    | 用户                     |
 | ------- | ------------------------ |
 | TSOxx01 | for user Janet Smith     |
 | TSOxx02 | for user Robert Anderson |
@@ -91,13 +89,13 @@
 HINT : 在OPTION3.4中DSN Level输入 `TSOxx01` 回车，看是否显示其ALIAS，如果出现类似下面的结果则表明ALIAS创建成功（此例中‘xx’为‘00’,‘yy’为‘01’）。**
 
 ![](/img/racf/lab2/step1.png)
- 
+
 
 1.5 验证新建用户是否可以顺利登陆TSO系统。
 
 ​                                                                             
 
- ### 步骤2：为用户重置密码
+ ## 步骤2：为用户重置密码
 
 当用户忘记密码的时候需要管理员yourid为该用户重新制定一个初始密码
 
@@ -107,7 +105,7 @@ HINT : 在OPTION3.4中DSN Level输入 `TSOxx01` 回车，看是否显示其ALIAS
 
 > HINT ：ALU
 
-### 步骤3：Revoke用户
+## 步骤3：Revoke用户
 
 当用户账号暂时不用的时候，安全起见应该将该账号Revoke挂起。
 
@@ -117,7 +115,7 @@ HINT : 在OPTION3.4中DSN Level输入 `TSOxx01` 回车，看是否显示其ALIAS
 
 > HINT ：ALU…REVOKE 
 
-### 步骤4：Resume用户
+## 步骤4：Resume用户
 
 当挂起的用户帐号需要重新启用的时候，应该及时地将帐号Resume。
 
@@ -127,7 +125,7 @@ HINT : 在OPTION3.4中DSN Level输入 `TSOxx01` 回车，看是否显示其ALIAS
 
 > HINT ：ALU…RESUME
 
-### 步骤5：**步骤 1** 挂起和启用用户帐号的时候，可以指定挂起和启用的具体日期。
+## 步骤5：**步骤 1** 挂起和启用用户帐号的时候，可以指定挂起和启用的具体日期。
 
 请设置挂起日期为实验的第二天，启用日期为1个月后。                                                 
 
@@ -135,19 +133,19 @@ HINT : 在OPTION3.4中DSN Level输入 `TSOxx01` 回车，看是否显示其ALIAS
 
 
 
-### 步骤6：查看是否生效，考虑如何撤销？
+## 步骤6：查看是否生效，考虑如何撤销？
 
 > HINT ：LU…/ALU…
 
 
 
-### 步骤7：使用Search命令查找以上新建的用户Profile
+## 步骤7：使用Search命令查找以上新建的用户Profile
 
 > HINT ：SEARCH CLASS(USER) MAKS(TSOxx)
 
 
 
-### 步骤8：RACF中有些Options是和用户相关的，请使用‘SETROPTS LIST’命令显示RACF OPTIONs设置
+## 步骤8：RACF中有些Options是和用户相关的，请使用‘SETROPTS LIST’命令显示RACF OPTIONs设置
 
 回答以下问题(可以到RACF面板中选择System OptionàDisplay也能看到RACF OPTIONs内容)：
 
@@ -167,25 +165,33 @@ HINT : 在OPTION3.4中DSN Level输入 `TSOxx01` 回车，看是否显示其ALIAS
 
 
 
-### 步骤9： 将用户连接到组。
+## 步骤9： 将用户连接到组。
 
 **步骤 1** RACF中给用户访问资源权限的最佳方法是将用户关联到可以访问这些资源的组中，这些组称为功能组(Functional Group)
 
 （1） 将用户Arthur Fielding(TSOxx04)连接到组FUNxxPRD，实现其对生产数据集的访问
 
-​                                                                             
+```
+
+```
+
+
 
 （2） 将用户Susan Johnson (TSOxx05)连接到组FUNxxTST，实现其对测试数据集的访问
 
-​                                                                             
+```
 
-​	**HINT ：CONNECT**
+```
 
-### 步骤10：使用什么RACF命令可以验证用户是否关联到组？
+
+
+>  HINT ：CONNECT
+
+## 步骤10：使用什么RACF命令可以验证用户是否关联到组？
 
 > HINT ：LU or LG
 
-### 步骤11： 总结本次实验体会及建议
+## 步骤11： 总结本次实验体会及建议
 
 
 
