@@ -7,9 +7,13 @@ export default [
     children: [
       // { name: "Demo", path: "demo" },
       { name: "实验介绍", path: "intro" },
-      { name: "实验一", path: "lab1" },
-      { name: "实验二", path: "lab2" },
-      { name: "实验三", path: "lab3" }
+      { name: "实验一：创建组RACF实验", path: "lab1" },
+      { name: "实验二：用户管理RACF实验", path: "lab2" },
+      { name: "实验三：分散式RACF安全管理实验", path: "lab3" },
+      { name: "实验四：数据集保护RACF实验I", path: "lab4" },
+      { name: "实验五：数据集保护RACF实验II", path: "lab5" },
+      { name: "实验六：保护TSO资源", path: "lab6" },
+      { name: "实验七：使用JCL执行RACF命令", path: "lab7" }
     ]
   },
   {

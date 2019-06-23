@@ -4,7 +4,7 @@
       <LabContent :content="content" />
     </template>
     <template slot="right">
-      <LabReport name="步骤 2">
+      <LabReport name="步骤 1">
         <a-form type="vertical" @submit="handleSubmit">
           <a-form-item label="What groups are you connected to?" :colon="false">
             <a-input></a-input>
@@ -30,10 +30,12 @@
               <a-button>下一步</a-button>
             </span>
             <span style="float: right">
-              <a-button style="margin-right: 10px" type="primary"
-                >保存</a-button
-              >
-              <a-button type="primary" html-type="submit">提交</a-button>
+              <a-button style="margin-right: 10px" type="primary">
+                保存
+              </a-button>
+              <a-button type="primary" html-type="submit">
+                提交
+              </a-button>
             </span>
           </div>
         </a-form>
@@ -49,7 +51,7 @@ import LabLayout from "@/components/LabLayout";
 import LabContent from "@/components/LabContent";
 import LabReport from "@/components/LabReport";
 import Console from "@/components/Console";
-import content from "./lab1.md";
+import content from "./lab4.md";
 
 export default {
   components: {
