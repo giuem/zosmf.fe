@@ -41,6 +41,11 @@
 
 ![img](/img/dfsms/lab3/step4.3.png)
 
+(4) 接着在‘SCDS BASE DEFINE’面板上选择“1 Add”选项，输入系统名称，如下图， 回车，然后按“F3”保存后退出。至此，SMS 的 SCDS 库配置完毕。
+
+![img](/img/dfsms/lab3/step4.4.png)
+
+==【备注:同济主机环境中系统名称为 S0W1，其他系统会不同，这些参数可以咨询本地系统管理员】==
 
 **步骤 5** 在ISMF主面板上选择‘4  Data Class’，创建3个Data Class，要求如下
 

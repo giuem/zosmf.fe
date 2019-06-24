@@ -4,17 +4,22 @@
 
     <router-view></router-view>
 
-    <a-form :form="form" layout="vertical" @submit="handleSubmit">
+    <a-divider />
+    <a-button>F1</a-button>
+    <a-button>F2</a-button>
+    <a-button @click="goBack">F3</a-button>
+    <a-button>F4</a-button>
+    <a-button>F5</a-button>
+    <a-button>F6</a-button>
+    <br />
+    <br />
+
+    <!-- <a-form :form="form" layout="vertical" @submit="handleSubmit">
       <a-form-item>
-        <a-input placeholder="输入命令，回车提交" v-decorator="['code']" />
+       a-input placeholder="输入命令，回车提交" v-decorator="['code']" />
       </a-form-item>
-      <!-- <a-form-item>
-        <a-button type="primary" html-type="submit" :loading="isLoading">
-          提交
-        </a-button>
-      </a-form-item> -->
     </a-form>
-    <pre v-show="result">{{ result }}</pre>
+    <pre v-show="result">{{ result }}</pre>-->
   </div>
 </template>
 
@@ -37,6 +42,11 @@ export default {
   },
 
   methods: {
+    goBack() {
+      if (!this.$route.path.endsWith("master")) {
+        this.$router.go(-1);
+      }
+    },
     handleSubmit(e) {
       e.preventDefault();
       console.log("command submit");

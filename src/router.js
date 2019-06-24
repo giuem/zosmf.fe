@@ -50,11 +50,21 @@ const router = new Router({
               component: () => import("@/components/Console/Panel/MaterPanel")
             },
             {
-              path: "ismf",
+              path: "is",
               component: () => import("@/components/Console/Panel/IsmfPanel")
             },
             {
-              path: "pdf",
+              path: "is/:option",
+              name: "isoption",
+              component: () => import("@/components/Console/Panel/ismf/Main")
+            },
+            {
+              path: "is/0/0",
+              component: () =>
+                import("@/components/Console/Panel/ismf/Is00profile")
+            },
+            {
+              path: "p",
               component: () => import("@/components/Console/Panel/PdfPanel")
             }
           ]

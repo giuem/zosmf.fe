@@ -1,15 +1,10 @@
 <template>
   <keep-alive>
-    <component :is="currentComponent">sdfsdf</component>
+    <component :is="currentComponent"></component>
   </keep-alive>
 </template>
 
 <script>
-// import LabLayout from "@/components/LabLayout";
-// import LabContent from "@/components/LabContent";
-// import LabReport from "@/components/LabReport";
-// import Console from "@/components/Console";
-// import content from "./lab.md";
 import dfsmsIntro from "@/pages/dashboard/dfsms/intro";
 import dfsmsLab1 from "@/pages/dashboard/dfsms/lab1";
 import dfsmsLab2 from "@/pages/dashboard/dfsms/lab2";
