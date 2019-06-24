@@ -32,6 +32,21 @@
         </a-input>
       </a-form-item>
       <a-form-item>
+        <a-input
+          v-decorator="[
+            'address',
+            {
+              rules: [{ required: true, message: '地址不能为空' }]
+            }
+          ]"
+          size="large"
+          type="password"
+          placeholder="请输入 zOS 主机地址"
+        >
+          <a-icon slot="prefix" type="cloud" />
+        </a-input>
+      </a-form-item>
+      <a-form-item>
         <a-button
           type="primary"
           html-type="submit"
