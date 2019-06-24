@@ -12,11 +12,9 @@
           <a-icon :type="menu.icon" />
           <span>{{ menu.name }}</span>
         </span>
-        <a-menu-item
-          v-for="submenu in menu.children"
-          :key="'/dashboard/' + menu.path + '/' + submenu.path"
-          >{{ submenu.name }}</a-menu-item
-        >
+        <a-menu-item v-for="submenu in menu.children" :key="submenu.path">{{
+          submenu.name
+        }}</a-menu-item>
       </a-sub-menu>
     </a-menu>
   </div>
@@ -46,7 +44,11 @@ export default {
   },
   methods: {
     handleMenuClick(e) {
-      this.$router.push(e.key);
+      if (e.keyPath[1] === "/dashboard/dfsms") {
+        this.$router.push({ name: "lab", params: { lab: e.key } });
+      } else {
+        this.$router.push(e.keyPath[1] + "/" + e.key);
+      }
     }
   }
 };

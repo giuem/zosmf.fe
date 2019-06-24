@@ -54,6 +54,7 @@ import Console from "@/components/Console";
 import content from "./lab1.md";
 
 export default {
+  name: "dfsms-lab1",
   components: {
     LabLayout,
     LabContent,

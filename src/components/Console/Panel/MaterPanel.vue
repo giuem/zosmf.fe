@@ -1,25 +1,16 @@
 <template>
   <div>
-    <h2>控制台</h2>
-
-    <router-view></router-view>
-
-    <a-form :form="form" layout="vertical" @submit="handleSubmit">
-      <a-form-item>
-        <a-input placeholder="输入命令，回车提交" v-decorator="['code']" />
-      </a-form-item>
-      <!-- <a-form-item>
-        <a-button type="primary" html-type="submit" :loading="isLoading">
-          提交
-        </a-button>
-      </a-form-item> -->
-    </a-form>
-    <pre v-show="result">{{ result }}</pre>
+    <a-button @click="routerTo">ISMF</a-button>
+    <a-button @click="routerTo">PDF</a-button>
   </div>
 </template>
 
 <script>
+// import mainPanel from "./Panel/MasPanel";
+// import secondaryPanel from "./Panel/SecondaryPanel";
+
 export default {
+  name: "sms-console",
   props: {
     isLoading: {
       type: Boolean,
@@ -32,15 +23,25 @@ export default {
   },
   data() {
     return {
-      form: this.$form.createForm(this)
+      form: this.$form.createForm(this),
+      optionIndex: 0,
+      currentPanelComponent: "main-panel"
     };
   },
 
   methods: {
+    routerTo(e) {
+      console.log(e.target.innerText);
+      this.$router.push(e.target.innerText);
+    },
     handleSubmit(e) {
       e.preventDefault();
       console.log("command submit");
       this.$emit("submit", this.form.getFieldsValue().code);
+    },
+    chooseOption(index) {
+      this.currentPanelComponent = "secondary-panel";
+      this.optionIndex = index;
     }
   }
 };
