@@ -1,41 +1,51 @@
 <template>
-  <div class="is4">
-    <h3>DATA CLASS APPLICATION SELECTION</h3>
-    <div class="content">
-      <a-row>To perform Data Class Operations, Specify:</a-row>
+  <div class="master-panel">
+    <h3 class="panel-title">DATA CLASS APPLICATION SELECTION</h3>
+    <div class="panel-content">
+      <a-row class="panel-name"
+        >To perform Data Class Operations, Specify:</a-row
+      >
       <a-row>
         <a-col :offset="1">
-          <a-input addonBefore="CDS Name"></a-input>
+          <a-input
+            v-focus
+            class="panel-option"
+            addonBefore="CDS Name"
+          ></a-input>
         </a-col>
       </a-row>
       <a-row>
         <a-col :offset="1">
-          <a-input addonBefore="Data Class Name"></a-input>
+          <a-input class="panel-option" addonBefore="Data Class Name"></a-input>
         </a-col>
       </a-row>
-      <br />
       <a-row>
-        <a-input addonBefore="Select one of the following options: "></a-input>
+        <a-input
+          class="panel-option"
+          addonBefore="Select one of the following options: "
+        ></a-input>
       </a-row>
       <a-row>
-        <a-col :offset="1" :span="1">1</a-col>
-        <a-col :span="5">List</a-col>
-        <a-col :span="17">- Generate a list of Data Classes </a-col>
+        <a-col :offset="1" :span="1" class="panel-cmd">1</a-col>
+        <a-col :span="5" class="panel-name">List</a-col>
+        <a-col :span="17" class="panel-desc"
+          >- Generate a list of Data Classes
+        </a-col>
       </a-row>
       <a-row>
-        <a-col :offset="1" :span="1">2</a-col>
-        <a-col :span="5">Display</a-col>
-        <a-col :span="17">- Display a Data Class</a-col>
+        <a-col :offset="1" :span="1" class="panel-cmd">2</a-col>
+        <a-col :span="5" class="panel-name">Display</a-col>
+        <a-col :span="17" class="panel-desc">- Display a Data Class</a-col>
       </a-row>
       <a-row>
-        <a-col :offset="1" :span="1">3</a-col>
-        <a-col :span="5">Define</a-col>
-        <a-col :span="17">- Define a Data Class</a-col>
+        <a-col :offset="1" :span="1" class="panel-cmd">3</a-col>
+        <a-col :span="5" class="panel-name">Define</a-col>
+        <a-col :span="17" class="panel-desc">- Define a Data Class</a-col>
       </a-row>
       <a-row>
-        <a-col :offset="1" :span="1">4</a-col>
-        <a-col :span="5">Alter</a-col>
-        <a-col :span="17">- Alter a Data Class </a-col>
+        <a-col :offset="1" :span="1" class="panel-cmd">4</a-col>
+        <a-col :span="5" class="panel-name">Alter</a-col>
+        <a-col :span="17" class="panel-desc">- Alter a Data Class </a-col>
       </a-row>
     </div>
   </div>

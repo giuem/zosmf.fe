@@ -1,16 +1,21 @@
 <template>
-  <div class="allocate-panel">
-    <hr />
-
-    <a-card title="Allocate New Data Set">
+  <div class="master-panel">
+    <h3 class="panel-title">Allocate New Data Set</h3>
+    <!-- <a-card title="Allocate New Data Set"> -->
+    <!-- <a-row></a-row> -->
+    <div class="panel-content">
       <a-form-item
+        class="panel-option"
+        :style="{ color: 'white' }"
         label="Data Set Name: "
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
+        >{{
+          this.$route.query.dataset.replace("'", "").replace("'", "")
+        }}</a-form-item
       >
-        {{ this.$route.query.dataset }}
-      </a-form-item>
       <a-form-item
+        class="panel-option"
         label="Volume Serial: "
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
@@ -21,6 +26,7 @@
         />
       </a-form-item>
       <a-form-item
+        class="panel-option"
         label="Space units: "
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
@@ -31,6 +37,7 @@
         />
       </a-form-item>
       <a-form-item
+        class="panel-option"
         label="Primary quantity: "
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
@@ -39,6 +46,7 @@
       </a-form-item>
 
       <a-form-item
+        class="panel-option"
         label="Secondary quantity: "
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
@@ -46,6 +54,7 @@
         <a-input placeholder="In above units" v-model="secQuantity" />
       </a-form-item>
       <a-form-item
+        class="panel-option"
         label="Directory blocks: "
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
@@ -56,6 +65,7 @@
         />
       </a-form-item>
       <a-form-item
+        class="panel-option"
         label="Record format: "
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
@@ -63,6 +73,7 @@
         <a-input v-model="recordFormat" />
       </a-form-item>
       <a-form-item
+        class="panel-option"
         label="Record length: "
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
@@ -70,6 +81,7 @@
         <a-input v-model="recordLen" />
       </a-form-item>
       <a-form-item
+        class="panel-option"
         label="Block size: "
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
@@ -78,13 +90,13 @@
       </a-form-item>
 
       <a-input
+        class="panel-option"
         addonBefore="Command >"
         @keyup.enter="Allocate"
-        placeholder="回车提交"
+        placeholder
       />
-    </a-card>
-
-    <br />
+      <!-- </a-card> -->
+    </div>
   </div>
 </template>
 
