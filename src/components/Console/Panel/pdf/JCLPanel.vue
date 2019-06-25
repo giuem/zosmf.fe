@@ -1,11 +1,12 @@
 <template>
   <div class="jcl-panel">
-    <hr />
-    <h3>EDIT {{ this.$route.query.dsn }}</h3>
+    <h3 class="panel-title">EDIT {{ this.$route.query.dsn }}</h3>
     <a-textarea :rows="15" v-model="code" />
-
-    <hr />
-    <a-input addonBefore="Command >" @keyup.enter="Command" v-model="cmd" />
+    <br />
+    <br />
+    <div v-focus class="input">
+      <a-input addonBefore="Command >" @keyup.enter="Command" v-model="cmd" />
+    </div>
   </div>
 </template>
 

@@ -69,10 +69,12 @@ const router = new Router({
             },
             {
               path: "data-set-utility",
+              name: "p32",
               component: () => import("@/components/Console/Panel/pdf/DsuPanel")
             },
             {
               path: "data-set-list-utility",
+              name: "p34",
               component: () =>
                 import("@/components/Console/Panel/pdf/DsluPanel")
             },

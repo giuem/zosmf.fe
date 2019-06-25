@@ -1,7 +1,7 @@
 <template>
   <div class="pdalist-panel">
-    <hr />
-    <h3>EDIT {{ this.$route.query.dsn }}</h3>
+    <!-- <hr /> -->
+    <h3 class="panel-title">EDIT {{ this.$route.query.dsn }}</h3>
 
     <a-table :columns="columns" :dataSource="datasets">
       <a slot="cmd" slot-scope="record">

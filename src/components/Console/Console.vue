@@ -1,18 +1,14 @@
 <template>
-  <div>
+  <!-- f3 返回 -->
+  <div @keyup.114="goBack">
     <h2>控制台</h2>
 
-    <router-view></router-view>
+    <a-button icon="rollback" @click="goBack">F3</a-button>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
 
-    <a-divider />
-    <a-button>F1</a-button>
-    <a-button>F2</a-button>
-    <a-button @click="goBack">F3</a-button>
-    <a-button>F4</a-button>
-    <a-button>F5</a-button>
-    <a-button>F6</a-button>
-    <br />
-    <br />
+    <!-- <br> -->
 
     <!-- <a-form :form="form" layout="vertical" @submit="handleSubmit">
       <a-form-item>

@@ -1,54 +1,63 @@
 <template>
-  <div class="is7">
-    <h3>ACS APPLICATION SELECTION</h3>
-    <div class="content">
+  <div class="master-panel">
+    <h3 class="panel-title">ACS APPLICATION SELECTION</h3>
+    <div class="panel-content">
       <a-row>
-        <a-input addonBefore=" Select one of the following options:"></a-input>
+        <a-input
+          v-focus
+          class="panel-option"
+          addonBefore="Select one of the following options:"
+        ></a-input>
       </a-row>
       <a-row>
-        <a-col :offset="1" :span="1">1</a-col>
-        <a-col :span="5">Edit</a-col>
-        <a-col :span="17">- Edit ACS Routine source code</a-col>
+        <a-col :offset="1" :span="1" class="panel-cmd">1</a-col>
+        <a-col :span="5" class="panel-name">Edit</a-col>
+        <a-col :span="17" class="panel-desc"
+          >- Edit ACS Routine source code</a-col
+        >
       </a-row>
       <a-row>
-        <a-col :offset="1" :span="1">2</a-col>
-        <a-col :span="5">Translate</a-col>
-        <a-col :span="17">- Translate ACS Routines to ACS Object Form</a-col>
+        <a-col :offset="1" :span="1" class="panel-cmd">2</a-col>
+        <a-col :span="5" class="panel-name">Translate</a-col>
+        <a-col :span="17" class="panel-desc"
+          >- Translate ACS Routines to ACS Object Form</a-col
+        >
       </a-row>
       <a-row>
-        <a-col :offset="1" :span="1">3</a-col>
-        <a-col :span="5">Validate</a-col>
-        <a-col :span="17"
+        <a-col :offset="1" :span="1" class="panel-cmd">3</a-col>
+        <a-col :span="5" class="panel-name">Validate</a-col>
+        <a-col :span="17" class="panel-desc"
           >- Validate ACS Routines Against Storage Constructs</a-col
         >
       </a-row>
       <a-row>
-        <a-col :offset="1" :span="1">4</a-col>
-        <a-col :span="5">Test</a-col>
-        <a-col :span="17"
+        <a-col :offset="1" :span="1" class="panel-cmd">4</a-col>
+        <a-col :span="5" class="panel-name">Test</a-col>
+        <a-col :span="17" class="panel-desc"
           >- Define/Alter Test Cases and Test ACS Routines</a-col
         >
       </a-row>
       <a-row>
-        <a-col :offset="1" :span="1">5</a-col>
-        <a-col :span="5">Display</a-col>
-        <a-col :span="17">- Display ACS Object Information</a-col>
+        <a-col :offset="1" :span="1" class="panel-cmd">5</a-col>
+        <a-col :span="5" class="panel-name">Display</a-col>
+        <a-col :span="17" class="panel-desc"
+          >- Display ACS Object Information</a-col
+        >
       </a-row>
       <a-row>
-        <a-col :offset="1" :span="1">6</a-col>
-        <a-col :span="5">Delete</a-col>
-        <a-col :span="17"
+        <a-col :offset="1" :span="1" class="panel-cmd">6</a-col>
+        <a-col :span="5" class="panel-name">Delete</a-col>
+        <a-col :span="17" class="panel-desc"
           >- Delete an ACS Object from a Source Control Data Set</a-col
         >
       </a-row>
       <br />
-      <a-row>If Display Option is Chosen, Specify:</a-row>
+      <a-row class="panel-name">If Display Option is Chosen, Specify:</a-row>
       <a-row>
         <a-col :offset="1">
-          <a-input addonBefore="CDS Name"></a-input>
+          <a-input class="panel-option" addonBefore="CDS Name"></a-input>
         </a-col>
       </a-row>
-      <br />
     </div>
   </div>
 </template>

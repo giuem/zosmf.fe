@@ -1,9 +1,9 @@
 <template>
-  <div class="dslist-panel">
-    <hr />
-
-    <h3>DSLIST - Data Sets Matching {{ this.$route.query.dsn }}</h3>
-    <a-table :columns="columns" :dataSource="datasets">
+  <div>
+    <h3 class="panel-title">
+      DSLIST - Data Sets Matching {{ this.$route.query.dsn }}
+    </h3>
+    <a-table :columns="columns" :dataSource="datasets" class="panel-table">
       <a slot="cmd" slot-scope="record">
         <a-popover title="Enter you command" trigger="click">
           <a slot="content">
@@ -85,3 +85,5 @@ export default {
   }
 };
 </script>
+
+<style></style>

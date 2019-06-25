@@ -1,36 +1,25 @@
 <template>
   <div class="master-panel">
-    <h3>ISMF PRIMARY OPTION MENU</h3>
-    <div class="option">
-      <a-input
-        addonBefore="OPTION >"
-        placeholder="请输入命令，回车确认"
-        @pressEnter="routerTo"
-      />
-    </div>
-    <div class="master-gutter">
+    <h3 class="panel-title">ISMF PRIMARY OPTION MENU</h3>
+    <a-input
+      class="panel-option"
+      addonBefore="OPTION >"
+      @pressEnter="routerTo"
+      v-focus
+    />
+    <div class="panel-content">
       <a-row :gutter="16" v-for="option in options" :key="option.cmd">
-        <a-col class="gutter-row" :span="2">
-          <div class="gutter-box">{{ option.cmd }}</div>
-        </a-col>
-        <a-col class="gutter-row" :span="7">
-          <div class="gutter-box">{{ option.name }}</div>
-        </a-col>
-        <a-col class="gutter-row" :span="15">
-          <div class="gutter-box">{{ option.desc }}</div>
-        </a-col>
+        <a-col class="panel-cmd" :span="2">{{ option.cmd }}</a-col>
+        <a-col class="panel-name" :span="7">{{ option.name }}</a-col>
+        <a-col class="panel-desc" :span="15">{{ option.desc }}</a-col>
       </a-row>
     </div>
-    <!-- 
-     <router-link to="master">
-      <a-button>F3</a-button>
-    </router-link> -->
   </div>
 </template>
 
 <script>
 export default {
-  name: "master-panel",
+  name: "ismf-panel",
   data() {
     return {
       option: "",

@@ -1,24 +1,17 @@
 <template>
-  <div>
-    <h3>CUSTOMPAC MASTER APPLICATION MENU</h3>
-    <div class="option">
-      <a-input
-        addonBefore="OPTION >"
-        placeholder="请输入命令，回车确认"
-        @pressEnter="routerTo"
-      />
-    </div>
-    <div class="master-gutter">
+  <div class="master-panel">
+    <h3 class="panel-title">CUSTOMPAC MASTER APPLICATION MENU</h3>
+
+    <a-input
+      class="panel-option"
+      addonBefore="OPTION >"
+      @pressEnter="routerTo"
+    />
+    <div class="panel-content">
       <a-row :gutter="16" v-for="option in options" :key="option.cmd">
-        <a-col class="gutter-row" :span="3">
-          <div class="gutter-box">{{ option.cmd }}</div>
-        </a-col>
-        <a-col class="gutter-row" :span="6">
-          <div class="gutter-box">{{ option.name }}</div>
-        </a-col>
-        <a-col class="gutter-row" :span="15">
-          <div class="gutter-box">{{ option.desc }}</div>
-        </a-col>
+        <a-col class="panel-cmd" :span="3">{{ option.cmd }}</a-col>
+        <a-col class="panel-name" :span="6">{{ option.name }}</a-col>
+        <a-col class="panel-desc" :span="15">{{ option.desc }}</a-col>
       </a-row>
     </div>
   </div>
@@ -26,7 +19,7 @@
 
 <script>
 export default {
-  name: "sms-console",
+  name: "master-panel",
   props: {
     isLoading: {
       type: Boolean,
@@ -92,11 +85,64 @@ export default {
 
   methods: {
     routerTo(e) {
-      console.log(e);
-      this.$router.push(e.target.value);
+      if (e.target.value === "p.3.2") {
+        this.$router.push({ name: "p32" });
+      } else if (e.target.value === "p.3.4") {
+        this.$router.push({ name: "p34" });
+      } else {
+        this.$router.push(e.target.value);
+      }
     }
   }
 };
 </script>
 
-<style></style>
+<style>
+.master-panel {
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 20px 10px 0 10px;
+  background-color: rgb(0, 0, 0);
+}
+.panel-title {
+  color: dodgerblue;
+  text-align: center;
+}
+
+.panel-option {
+  margin: 10px 0;
+}
+
+.panel-option .ant-input-group-addon {
+  border: none;
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0);
+}
+.panel-option input {
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px white solid;
+  background-color: rgba(255, 255, 255, 0);
+}
+.panel-content {
+  padding: 20px;
+}
+
+.panel-cmd {
+  color: white;
+}
+
+.panel-name {
+  color: cyan;
+}
+
+.panel-desc {
+  color: greenyellow;
+}
+
+.panel-option .ant-form-item-label label {
+  color: greenyellow;
+}
+</style>

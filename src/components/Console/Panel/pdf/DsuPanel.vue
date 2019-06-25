@@ -1,30 +1,35 @@
 <template>
-  <div class="dsu-panel">
-    <hr />
+  <div class="master-panel">
+    <h3 class="panel-title">Data Set Utility</h3>
+    <div class="panel-content">
+      <div class="panel-name">
+        <a-row>
+          <a-col :span="12">A Allocate new data set</a-col>
+          <a-col :span="12">C Catalog data set</a-col>
+        </a-row>
+        <a-row>
+          <a-col :span="12">R Rename entire data set</a-col>
+          <a-col :span="12">U Uncatalog data set</a-col>
+        </a-row>
+        <a-row>
+          <a-col :span="12">D Delete entire data set</a-col>
+          <a-col :span="12">S Short data set information</a-col>
+        </a-row>
+        <a-row>
+          <a-col :span="12">blank Data set information</a-col>
+          <a-col :span="12">V VSAM Utilities</a-col>
+        </a-row>
+      </div>
 
-    <a-card title="Data Set Utility">
-      <a-row>
-        <a-col :span="12">A Allocate new data set</a-col>
-        <a-col :span="12">C Catalog data set</a-col>
-      </a-row>
-      <a-row>
-        <a-col :span="12">R Rename entire data set</a-col>
-        <a-col :span="12">U Uncatalog data set</a-col>
-      </a-row>
-      <a-row>
-        <a-col :span="12">D Delete entire data set</a-col>
-        <a-col :span="12">S Short data set information</a-col>
-      </a-row>
-      <a-row>
-        <a-col :span="12">blank Data set information</a-col>
-        <a-col :span="12">V VSAM Utilities</a-col>
-      </a-row>
-    </a-card>
+      <br />
 
-    <br />
-
-    <a-card title="Other Partitioned, Sequential or VSAM Data Set">
+      <a-row class="panel-desc"
+        >Other Partitioned, Sequential or VSAM Data Set:</a-row
+      >
+      <!-- <a-card title="Other Partitioned, Sequential or VSAM Data Set"> -->
       <a-form-item
+        class="panel-option"
+        v-focus
         label="Name: "
         :label-col="{ span: 3 }"
         :wrapper-col="{ span: 21 }"
@@ -35,6 +40,7 @@
         />
       </a-form-item>
       <a-form-item
+        class="panel-option"
         label="Volume Serial: "
         :label-col="{ span: 6 }"
         :wrapper-col="{ span: 18 }"
@@ -45,6 +51,7 @@
         />
       </a-form-item>
       <a-form-item
+        class="panel-option"
         label="Data Set Password: "
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
@@ -52,14 +59,16 @@
         <a-input placeholder="If password protected" v-model="password" />
       </a-form-item>
       <a-input
+        class="panel-option"
         addonBefore="Option >"
         @keyup.enter="Allocate"
-        placeholder="回车提交"
+        placeholder
         v-model="option"
       />
-    </a-card>
+      <!-- </a-card> -->
 
-    <br />
+      <br />
+    </div>
   </div>
 </template>
 

@@ -1,32 +1,42 @@
 <template>
-  <div class="pdf-panel">
-    <hr />
-    <h3>ISPF Primary Option Menu</h3>
-    <a-button
-      block
-      v-for="option in mainOptions"
-      :key="option.index"
-      @click="chooseOption(option.index)"
-    >
-      {{ `${option.content}` }}
-    </a-button>
-    <hr />
+  <div class="master-panel">
+    <h3 class="panel-title">ISPF Primary Option Menu</h3>
+    <a-input
+      v-focus
+      class="panel-option"
+      addonBefore="OPTION >"
+      @pressEnter="routerTo"
+    />
+
+    <div class="panel-content">
+      <a-row :gutter="16" v-for="option in options" :key="option.cmd">
+        <a-col class="panel-cmd" :span="3">{{ option.cmd }}</a-col>
+        <a-col class="panel-name" :span="6">{{ option.name }}</a-col>
+        <a-col class="panel-desc" :span="15">{{ option.desc }}</a-col>
+      </a-row>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "pdf-panel",
+  name: "master-panel",
   data() {
     return {
-      mainOptions: [
+      options: [
         {
           index: 0,
-          content: "3.2 Data Set Utility"
+          cmd: "3.2",
+          name: "Data Set Utility",
+          desc:
+            "Allocate, rename, delete, catalog, uncatalog, or display information of an entire data set"
         },
         {
           index: 1,
-          content: "3.4 Data Set List Utility"
+          cmd: "3.4",
+          name: "Data Set List Utility",
+          desc:
+            "Print or display (to process) list of data set names. Print or display VTOC information"
         }
       ]
     };
@@ -35,7 +45,16 @@ export default {
     chooseOption(index) {
       if (index == 0) this.$router.push("data-set-utility");
       else if (index == 1) this.$router.push("data-set-list-utility");
+    },
+    routerTo(e) {
+      if (e.target.value === "3.2") {
+        this.chooseOption(0);
+      } else if (e.target.value === "3.4") {
+        this.chooseOption(1);
+      }
     }
   }
 };
 </script>
+
+<style></style>
