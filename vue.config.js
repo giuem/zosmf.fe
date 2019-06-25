@@ -3,7 +3,8 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "http://localhost:8080",
+        //target: "http://localhost:8080",
+        target: "http://139.199.75.41:3000/mock/11/sms",
         changeOrigin: true,
         pathRewrite: { "^/api": "" }
       }

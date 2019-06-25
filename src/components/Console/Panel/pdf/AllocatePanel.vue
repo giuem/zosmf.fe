@@ -10,9 +10,7 @@
         label="Data Set Name: "
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
-        >{{
-          this.$route.query.dataset.replace("'", "").replace("'", "")
-        }}</a-form-item
+        >{{ this.$route.query.dataset }}</a-form-item
       >
       <a-form-item
         class="panel-option"
@@ -89,6 +87,15 @@
         <a-input v-model="blockSize" />
       </a-form-item>
 
+      <a-form-item
+        class="panel-option"
+        label="Data set name type: "
+        :label-col="{ span: 8 }"
+        :wrapper-col="{ span: 16 }"
+      >
+        <a-input v-model="dsorg" />
+      </a-form-item>
+
       <a-input
         class="panel-option"
         addonBefore="Command >"
@@ -114,37 +121,43 @@ export default {
       dirBlocks: "",
       recordFormat: "",
       recordLen: "",
-      blockSize: ""
+      blockSize: "",
+      dsorg: ""
     };
   },
   methods: {
     Allocate() {
-      axios
-        .post("/api/allocateds", {
-          dsName: this.$route.query.dataset,
-          volser: this.volumeName,
-          aclUnit: this.spaceUnits,
-          primary: this.priQuantity,
-          secondary: this.secQuantity,
-          dirblk: this.dirBlocks,
-          recfm: this.recordFormat,
-          lrecl: this.recordLen,
-          blksize: this.blockSize,
-          dsorg: "PO"
-        })
-        .then(response => {
-          console.log(response);
-          switch (response.status) {
-            // 创建成功
-            case 200:
+      if (this.dsorg.toUpperCase() != "PDS")
+        this.$message.error("Please allocate a PDS");
+      else {
+        axios
+          .post("/sms/createds", {
+            name: this.$route.query.dataset,
+            volser: this.volumeName,
+            unit: 3390,
+            dsorg: "PO",
+            aclunit: this.spaceUnits,
+            primary: parseInt(this.priQuantity),
+            secondary: parseInt(this.secQuantity),
+            avgblk: parseInt(this.dirBlocks),
+            recfm: this.recordFormat,
+            blksize: parseInt(this.blockSize),
+            lrecl: parseInt(this.recordLen)
+          })
+          .then(res => {
+            console.log("AllocatePanel post '/sms/createds' 请求成功：", res);
+
+            if (res.data == "") {
               this.$message.success("Data set allocated");
               this.$router.push("data-set-utility");
-            // 创建失败...
-          }
-        })
-        .catch(err => {
-          console.log("AllocatePanel post '/allocateds' 请求错误：", err);
-        });
+            } else {
+              this.$message.error("Data set not allocated");
+            }
+          })
+          .catch(err => {
+            console.log("AllocatePanel post '/sms/createds' 请求错误：", err);
+          });
+      }
     }
   }
 };
