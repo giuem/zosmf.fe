@@ -5,7 +5,6 @@ export default [
     path: "racf",
     icon: "safety",
     children: [
-      // { name: "Demo", path: "demo" },
       { name: "实验介绍", path: "intro" },
       { name: "实验一：创建组RACF实验", path: "lab1" },
       { name: "实验二：用户管理RACF实验", path: "lab2" },
