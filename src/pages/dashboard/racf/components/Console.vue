@@ -1,30 +1,19 @@
 <template>
-  <div>
-    <h2>控制台</h2>
-    <a-form :form="form" layout="vertical" @submit="handleSubmit">
-      <a-form-item>
-        <a-textarea
-          placeholder="请输入命令"
-          v-decorator="[
-            'command',
-            {
-              rules: [{ required: true, message: '请输入命令' }]
-            }
-          ]"
-        />
-      </a-form-item>
-      <a-form-item>
-        <a-button type="primary" html-type="submit" :loading="isLoading">
-          提交
-        </a-button>
-      </a-form-item>
-    </a-form>
-    <pre v-show="result">{{ result }}</pre>
-  </div>
+  <a-tabs type="card">
+    <a-tab-pane tab="命令行" key="command"><Command /></a-tab-pane>
+    <a-tab-pane tab="JCL" key="jcl"><JCL /></a-tab-pane>
+  </a-tabs>
 </template>
 
 <script>
+import Command from "./Command";
+import JCL from "./JCL";
+
 export default {
+  components: {
+    Command,
+    JCL
+  },
   props: {
     isLoading: {
       type: Boolean,

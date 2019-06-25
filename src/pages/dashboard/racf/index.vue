@@ -6,11 +6,7 @@
     <template slot="right">
       <div>TODO</div>
       <a-divider />
-      <Console
-        :result="result"
-        :isLoading="isSubmitLoading"
-        @submit="handleSubmit"
-      />
+      <Console />
     </template>
   </LabLayout>
 </template>
@@ -34,19 +30,26 @@ export default {
     return {
       content: "",
       result: "",
+      currentStep: 1,
       isSubmitLoading: false
     };
   },
 
+  computed: {
+    lab() {
+      return this.$route.params.lab;
+    }
+  },
+
   created() {
-    const lab = this.$route.params.lab;
-    this.getDoc(lab);
+    this.getDoc(this.lab);
   },
 
   watch: {
-    $route(to) {
-      const lab = to.params.lab;
+    lab(lab) {
+      this.currentStep = 1;
       this.getDoc(lab);
+      this.getQuestions();
     }
   },
 
@@ -64,17 +67,10 @@ export default {
           }
         });
     },
-    async handleSubmit(data) {
-      this.isSubmitLoading = true;
-      try {
-        const response = await Axios.post("/api/racf/inputCommand", data);
-        this.result = response.data;
-      } catch (error) {
-        this.$message.error("服务器错误");
-      } finally {
-        this.isSubmitLoading = false;
-      }
-      console.log(data);
+
+    getQuestions() {
+      this.lab;
+      this.currentStep;
     }
   }
 };
