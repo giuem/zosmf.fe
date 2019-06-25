@@ -66,6 +66,34 @@ const router = new Router({
             {
               path: "p",
               component: () => import("@/components/Console/Panel/PdfPanel")
+            },
+            {
+              path: "data-set-utility",
+              component: () => import("@/components/Console/Panel/pdf/DsuPanel")
+            },
+            {
+              path: "data-set-list-utility",
+              component: () =>
+                import("@/components/Console/Panel/pdf/DsluPanel")
+            },
+            {
+              path: "allocate-dataset",
+              component: () =>
+                import("@/components/Console/Panel/pdf/AllocatePanel")
+            },
+            {
+              path: "dslist",
+              component: () =>
+                import("@/components/Console/Panel/pdf/DslistPanel")
+            },
+            {
+              path: "jcl",
+              component: () => import("@/components/Console/Panel/pdf/JCLPanel")
+            },
+            {
+              path: "pdslist",
+              component: () =>
+                import("@/components/Console/Panel/pdf/PdslistPanel")
             }
           ]
         }
