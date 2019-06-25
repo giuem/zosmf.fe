@@ -13,10 +13,17 @@
         </a-popover>
       </a>
     </a-table>
+
+    <a-input
+      addonBefore="Command >"
+      @keyup.enter="commandLine"
+      v-model="cmdLine"
+    />
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "pdslist-panel",
   data() {
@@ -60,11 +67,25 @@ export default {
           changed: "2019/05/27"
         }
       ],
-      cmd: ""
+      cmd: "",
+      cmdLine: ""
     };
   },
-
+  created() {
+    this.getPdsList();
+  },
   methods: {
+    getPdsList() {
+      axios
+        .get("/api/getPdsList/", this.$route.query.dsn)
+        .then(res => {
+          this.datasets = res.data.datasets;
+        })
+        .catch(err => {
+          console.log("PdslistPanel Get 'getPdsList/' Error: ", err);
+        });
+    },
+
     Command(key) {
       // console.log(key, this.cmd)
       if (this.cmd.toUpperCase() == "D") {
@@ -77,6 +98,23 @@ export default {
             dsn: this.$route.query.dsn + "(" + this.datasets[key].name + ")"
           }
         });
+      }
+    },
+
+    commandLine() {
+      if (this.cmdLine[0].toUpperCase() == "S") {
+        // 创建分区数据集成员
+        axios
+          .post("creatPdsMem/", {
+            dsName: this.$route.query.dsn,
+            memName: this.cmdLine.split(" ")[1].toUpperCase()
+          })
+          .then(res => {
+            console.log("PdsListPanel Post 'creatPdsMem/' Success:", res);
+          })
+          .catch(err => {
+            console.log("PdsListPanel Post 'creatPdsMem/' Error: ", err);
+          });
       }
     }
   }

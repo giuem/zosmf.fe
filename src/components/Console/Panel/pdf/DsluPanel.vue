@@ -61,7 +61,7 @@
 
     <a-input
       addonBefore="Option >"
-      @keyup.enter="Allocate"
+      @keyup.enter="Option"
       placeholder="回车提交"
       v-model="option"
     />
@@ -94,7 +94,7 @@ export default {
     };
   },
   methods: {
-    Allocate() {
+    Option() {
       // post ...
       if (this.dsname.length == 0) this.$message.error("Enter required field");
       else {

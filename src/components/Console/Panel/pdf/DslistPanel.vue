@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "dslist-panel",
   data() {
@@ -57,7 +58,21 @@ export default {
       cmd: ""
     };
   },
+  created() {
+    this.getDsList();
+  },
   methods: {
+    getDsList() {
+      axios
+        .get("getDsList/", this.$route.query.dsn)
+        .then(res => {
+          this.datasets = res.data.datasets;
+        })
+        .catch(err => {
+          console.log("DslistPanel Get 'getDsList/' Error: ", err);
+        });
+    },
+
     Command(key) {
       // console.log(key, this.cmd)
       if (this.cmd.toUpperCase() == "D") {

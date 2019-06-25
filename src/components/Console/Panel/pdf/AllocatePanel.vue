@@ -8,7 +8,7 @@
         :label-col="{ span: 8 }"
         :wrapper-col="{ span: 16 }"
       >
-        {{ this.$route.query.dataset.replace("'", "").replace("'", "") }}
+        {{ this.$route.query.dataset }}
       </a-form-item>
       <a-form-item
         label="Volume Serial: "
@@ -89,6 +89,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "allocate-panel",
   data() {
@@ -105,8 +107,32 @@ export default {
   },
   methods: {
     Allocate() {
-      // post ...
-      this.$router.push("data-set-utility");
+      axios
+        .post("/api/allocateds", {
+          dsName: this.$route.query.dataset,
+          volser: this.volumeName,
+          aclUnit: this.spaceUnits,
+          primary: this.priQuantity,
+          secondary: this.secQuantity,
+          dirblk: this.dirBlocks,
+          recfm: this.recordFormat,
+          lrecl: this.recordLen,
+          blksize: this.blockSize,
+          dsorg: "PO"
+        })
+        .then(response => {
+          console.log(response);
+          switch (response.status) {
+            // 创建成功
+            case 200:
+              this.$message.success("Data set allocated");
+              this.$router.push("data-set-utility");
+            // 创建失败...
+          }
+        })
+        .catch(err => {
+          console.log("AllocatePanel post '/allocateds' 请求错误：", err);
+        });
     }
   }
 };
