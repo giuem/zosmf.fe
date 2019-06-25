@@ -28,36 +28,8 @@ const router = new Router({
           component: () => import("@/pages/dashboard/reports")
         },
         {
-          path: "racf/intro",
-          component: () => import("@/pages/dashboard/racf/intro")
-        },
-        {
-          path: "racf/lab1",
-          component: () => import("@/pages/dashboard/racf/lab1")
-        },
-        {
-          path: "racf/lab2",
-          component: () => import("@/pages/dashboard/racf/lab2")
-        },
-        {
-          path: "racf/lab3",
-          component: () => import("@/pages/dashboard/racf/lab3")
-        },
-        {
-          path: "racf/lab4",
-          component: () => import("@/pages/dashboard/racf/lab4")
-        },
-        {
-          path: "racf/lab5",
-          component: () => import("@/pages/dashboard/racf/lab5")
-        },
-        {
-          path: "racf/lab6",
-          component: () => import("@/pages/dashboard/racf/lab6")
-        },
-        {
-          path: "racf/lab7",
-          component: () => import("@/pages/dashboard/racf/lab7")
+          path: "racf/:lab",
+          component: () => import("@/pages/dashboard/racf")
         },
         {
           path: "dfsms/demo",
