@@ -32,6 +32,20 @@
         </a-input>
       </a-form-item>
       <a-form-item>
+        <a-input
+          v-decorator="[
+            'address',
+            {
+              rules: [{ required: true, message: '地址不能为空' }]
+            }
+          ]"
+          size="large"
+          placeholder="10.60.43.8:8800"
+        >
+          <a-icon slot="prefix" type="cloud" />
+        </a-input>
+      </a-form-item>
+      <a-form-item>
         <a-button
           type="primary"
           html-type="submit"

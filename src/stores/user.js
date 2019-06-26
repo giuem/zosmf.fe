@@ -1,6 +1,7 @@
+import Axios from "axios";
 const SESSION_USER = "zosmf_user";
 
-let username = "ST013";
+let username = "";
 try {
   username = JSON.parse(sessionStorage.getItem(SESSION_USER)).account;
 } catch (error) {
@@ -30,7 +31,9 @@ const actions = {
   },
 
   logout({ commit }) {
-    commit("SET_USER", {});
+    Axios.delete("/api/logoff").then(() => {
+      commit("SET_USER", {});
+    });
   }
 };
 
