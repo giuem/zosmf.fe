@@ -11,7 +11,6 @@
             :key="index"
             :label="question.q"
             :colon="false"
-            v-if="question.step === steps[currentStepIndex]"
           >
             <a-input v-model="question.a"></a-input>
           </a-form-item>
@@ -30,10 +29,18 @@
               >
             </span>
             <span style="float: right">
-              <a-button style="margin-right: 10px" type="primary"
+              <a-button
+                style="margin-right: 10px"
+                type="primary"
+                @click="$emit('saveReport', 6, questions)"
                 >保存</a-button
               >
-              <a-button type="primary" html-type="submit">提交</a-button>
+              <a-button
+                type="primary"
+                html-type="submit"
+                @click="$emit('submitReport', 6, questions)"
+                >提交</a-button
+              >
             </span>
           </div>
         </a-form>
@@ -63,27 +70,20 @@ export default {
       content,
       currentStepIndex: 0,
       steps: [2, 5, 6],
-      questions: [
-        {
-          step: 2,
-          q: "记录盘卷的空间使用情况",
-          a: ""
-        },
-        {
-          step: 5,
-          q:
-            "盘卷空间成功释放之后，进入3.4，重新观察盘卷，记录空间使用情况并对比。",
-          a: ""
-        },
-        {
-          step: 6,
-          q: "总结本次实验体会及建议",
-          a: ""
-        }
-      ]
+      questions: []
     };
   },
-
+  created() {
+    // this.steps.forEach(step => {
+    //   axios.get(`/api/questions/sms/lab6/${step}`).then(res => {
+    //     console.log(res);
+    //     res.map(item => {
+    //       return (item.step = step);
+    //     });
+    //     questions.push(...res);
+    //   });
+    // });
+  },
   methods: {
     handleSubmit(e) {
       e.preventDefault();

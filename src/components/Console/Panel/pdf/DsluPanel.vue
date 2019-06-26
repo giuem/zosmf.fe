@@ -66,13 +66,14 @@
         </a-form-item>
       </div>
       <!-- </a-card> -->
-    <a-input
-     class="panel-option"
-      addonBefore="Option >"
-      @keyup.enter="Option"
-      placeholder=""
-      v-model="option"
-    />
+      <a-input
+        class="panel-option"
+        addonBefore="Option >"
+        @keyup.enter="Option"
+        placeholder
+        v-model="option"
+      />
+    </div>
   </div>
 </template>
 

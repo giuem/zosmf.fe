@@ -11,7 +11,6 @@
             :key="index"
             :label="question.q"
             :colon="false"
-            v-if="question.step === steps[currentStepIndex]"
           >
             <a-input v-model="question.a"></a-input>
           </a-form-item>
@@ -30,10 +29,18 @@
               >
             </span>
             <span style="float: right">
-              <a-button style="margin-right: 10px" type="primary"
+              <a-button
+                style="margin-right: 10px"
+                type="primary"
+                @click="$emit('saveReport', 3, questions)"
                 >保存</a-button
               >
-              <a-button type="primary" html-type="submit">提交</a-button>
+              <a-button
+                type="primary"
+                html-type="submit"
+                @click="$emit('submitReport', 3, questions)"
+                >提交</a-button
+              >
             </span>
           </div>
         </a-form>
@@ -63,36 +70,20 @@ export default {
       content,
       currentStepIndex: 0,
       steps: [1, 13, 17],
-      questions: [
-        {
-          step: 1,
-          q: "在SDSF面板中执行系统命令/D SMS，查看系统的SMS库信息",
-          a: ""
-        },
-        {
-          step: 13,
-          q: "输入数据集yourid.TEST.SDS，测试结果如何？",
-          a: ""
-        },
-        {
-          step: 13,
-          q: "新建测试用例CASE2，输入数据集yourid.TEST.PDS，测试结果如何？",
-          a: ""
-        },
-        {
-          step: 13,
-          q: "新建测试用例CASE3，输入数据集yourid.TEST.KSDS，测试结果如何？",
-          a: ""
-        },
-        {
-          step: 17,
-          q: "总结本次实验体会及建议",
-          a: ""
-        }
-      ]
+      questions: []
     };
   },
-
+  created() {
+    // this.steps.forEach(step => {
+    //   axios.get(`/api/questions/sms/lab3/${step}`).then(res => {
+    //     console.log(res);
+    //     res.map(item => {
+    //       return (item.step = step);
+    //     });
+    //     questions.push(...res);
+    //   });
+    // });
+  },
   methods: {
     handleSubmit(e) {
       e.preventDefault();

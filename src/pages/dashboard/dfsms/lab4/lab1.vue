@@ -11,7 +11,6 @@
             :key="index"
             :label="question.q"
             :colon="false"
-            v-if="question.step === steps[currentStepIndex]"
           >
             <a-input v-model="question.a"></a-input>
           </a-form-item>
@@ -30,12 +29,18 @@
               >
             </span>
             <span style="float: right">
-              <a-button style="margin-right: 10px" type="primary">
-                保存
-              </a-button>
-              <a-button type="primary" html-type="submit">
-                提交
-              </a-button>
+              <a-button
+                style="margin-right: 10px"
+                type="primary"
+                @click="$emit('saveReport', 4, questions)"
+                >保存</a-button
+              >
+              <a-button
+                type="primary"
+                html-type="submit"
+                @click="$emit('submitReport', 4, questions)"
+                >提交</a-button
+              >
             </span>
           </div>
         </a-form>
@@ -65,39 +70,20 @@ export default {
       content,
       currentStepIndex: 0,
       steps: [6, 7],
-      questions: [
-        {
-          step: 6,
-          q: "所有的数据集都成功转换了吗？‘是’还是‘不是’？",
-          a: ""
-        },
-        {
-          step: 6,
-          q:
-            "如果答案是‘不是’，那么哪些数据集没有转换成功？为什么没有转换成功？",
-          a: ""
-        },
-        {
-          step: 6,
-          q:
-            "ACS Routine是否对每一个转换成功的数据集赋予了一个Storage Class？请记录下Storage Class的名字。",
-          a: ""
-        },
-        {
-          step: 6,
-          q:
-            "ACS Routine是否对每一个转换成功的数据集赋予了一个Management Class？请记录下Management Class的名字。",
-          a: ""
-        },
-        {
-          step: 7,
-          q: "总结本次实验体会及建议",
-          a: ""
-        }
-      ]
+      questions: []
     };
   },
-
+  created() {
+    // this.steps.forEach(step => {
+    //   axios.get(`/api/questions/sms/lab4/${step}`).then(res => {
+    //     console.log(res);
+    //     res.map(item => {
+    //       return (item.step = step);
+    //     });
+    //     questions.push(...res);
+    //   });
+    // });
+  },
   methods: {
     handleSubmit(e) {
       e.preventDefault();

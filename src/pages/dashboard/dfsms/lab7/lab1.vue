@@ -11,7 +11,6 @@
             :key="index"
             :label="question.q"
             :colon="false"
-            v-if="question.step === steps[currentStepIndex]"
           >
             <a-input v-model="question.a"></a-input>
           </a-form-item>
@@ -30,10 +29,18 @@
               >
             </span>
             <span style="float: right">
-              <a-button style="margin-right: 10px" type="primary"
+              <a-button
+                style="margin-right: 10px"
+                type="primary"
+                @click="$emit('saveReport', 7, questions)"
                 >保存</a-button
               >
-              <a-button type="primary" html-type="submit">提交</a-button>
+              <a-button
+                type="primary"
+                html-type="submit"
+                @click="$emit('submitReport', 7, questions)"
+                >提交</a-button
+              >
             </span>
           </div>
         </a-form>
@@ -63,16 +70,10 @@ export default {
       content,
       currentStepIndex: 0,
       steps: [6],
-      questions: [
-        {
-          step: 6,
-          q: "总结本次实验体会及建议",
-          a: ""
-        }
-      ]
+      questions: []
     };
   },
-
+  created() {},
   methods: {
     handleSubmit(e) {
       e.preventDefault();
