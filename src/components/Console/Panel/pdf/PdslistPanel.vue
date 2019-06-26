@@ -31,7 +31,7 @@ export default {
       columns: [
         {
           title: "Name",
-          dataIndex: "name"
+          dataIndex: "member"
         },
         {
           title: "Size",
@@ -51,51 +51,56 @@ export default {
           scopedSlots: { customRender: "cmd" }
         }
       ],
-      datasets: [
-        {
-          key: "0",
-          name: "JOB1",
-          size: "24",
-          created: "2019/05/27",
-          changed: "2019/05/27"
-        },
-        {
-          key: "1",
-          name: "JOB2",
-          size: "25",
-          created: "2019/05/27",
-          changed: "2019/05/27"
-        }
-      ],
+      datasets: [],
       cmd: "",
       cmdLine: ""
     };
   },
   created() {
-    this.getPdsList();
+    this.getPdsMemList();
   },
   methods: {
-    getPdsList() {
+    getPdsMemList() {
       axios
-        .get("/api/getPdsList/", this.$route.query.dsn)
+        .get("/sms/getpdsmember", this.$route.query.dsn)
         .then(res => {
-          this.datasets = res.data.datasets;
+          console.log("PdslistPanel Get '/sms/getpdsmember' Success: ", res);
+          this.datasets = res.data.items;
+          for (let i = 0; i < this.datasets.length; i++)
+            this.datasets[i].key = i;
         })
         .catch(err => {
-          console.log("PdslistPanel Get 'getPdsList/' Error: ", err);
+          console.log("PdslistPanel Get '/sms/getpdsmember' Error: ", err);
         });
     },
 
     Command(key) {
       // console.log(key, this.cmd)
       if (this.cmd.toUpperCase() == "D") {
-        // post ...
+        // delete ...
+        axios
+          .delete("/sms/deletepdsmember", {
+            pdsMemName:
+              this.$route.query.dsn + "(" + this.datasets[key].member + ")"
+          })
+          .then(res => {
+            console.log(
+              "PdslistPanel Delete '/sms/deletepdsmember' 请求成功：",
+              res
+            );
+            this.getPdsMemList();
+          })
+          .catch(err => {
+            console.log(
+              "PdslistPanel Delete '/sms/deletepdsmember' 请求错误：",
+              err
+            );
+          });
       } else if (this.cmd.toUpperCase() == "E") {
-        // post ...
         this.$router.push({
           path: "jcl",
           query: {
-            dsn: this.$route.query.dsn + "(" + this.datasets[key].name + ")"
+            dsn: this.$route.query.dsn + "(" + this.datasets[key].member + ")"
           }
         });
       }
@@ -103,18 +108,14 @@ export default {
 
     commandLine() {
       if (this.cmdLine[0].toUpperCase() == "S") {
+        var memName = this.cmdLine.split(" ")[1].toUpperCase();
         // 创建分区数据集成员
-        axios
-          .post("creatPdsMem/", {
-            dsName: this.$route.query.dsn,
-            memName: this.cmdLine.split(" ")[1].toUpperCase()
-          })
-          .then(res => {
-            console.log("PdsListPanel Post 'creatPdsMem/' Success:", res);
-          })
-          .catch(err => {
-            console.log("PdsListPanel Post 'creatPdsMem/' Error: ", err);
-          });
+        this.$router.push({
+          path: "jcl",
+          query: {
+            dsn: this.$route.query.dsn + "(" + memName + ")"
+          }
+        });
       }
     }
   }

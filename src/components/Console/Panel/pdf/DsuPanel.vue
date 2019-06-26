@@ -36,7 +36,7 @@
       >
         <a-input
           placeholder="Input the name of the data set"
-          v-model="dataSetName"
+          v-model="dsName"
         />
       </a-form-item>
       <a-form-item
@@ -78,21 +78,19 @@ export default {
   data() {
     return {
       option: "",
-      dataSetName: "",
+      dsName: "",
       volumeName: "",
       password: ""
     };
   },
   methods: {
     Option() {
-      // post ...
-      if (this.dataSetName.length == 0)
-        this.$message.error("Enter required field");
+      if (this.dsName.length == 0) this.$message.error("Enter required field");
       else if (this.option.toUpperCase() == "A") {
         this.$router.push({
           path: "allocate-dataset",
           query: {
-            dataset: this.dataSetName
+            dataset: this.dsName.toUpperCase()
           }
         });
       }

@@ -70,7 +70,7 @@
         class="panel-option"
         addonBefore="Option >"
         @keyup.enter="Option"
-        placeholder
+        placeholder=""
         v-model="option"
       />
     </div>
@@ -104,13 +104,12 @@ export default {
   },
   methods: {
     Option() {
-      // post ...
       if (this.dsname.length == 0) this.$message.error("Enter required field");
       else {
         this.$router.push({
           path: "dslist",
           query: {
-            dsn: this.dsname
+            dsn: this.dsname.toUpperCase()
           }
         });
       }

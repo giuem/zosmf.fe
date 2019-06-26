@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "dslist-panel",
   data() {
@@ -25,7 +24,7 @@ export default {
       columns: [
         {
           title: "Dataset",
-          dataIndex: "dataset"
+          dataIndex: "dsname"
         },
         {
           title: "Message",
@@ -41,20 +40,7 @@ export default {
           scopedSlots: { customRender: "cmd" }
         }
       ],
-      datasets: [
-        {
-          key: "0",
-          dataset: "ST016",
-          message: "balabala",
-          volume: "ALIAS"
-        },
-        {
-          key: "1",
-          dataset: "ST016.CALENDAR.REPORT",
-          message: "balabala",
-          volume: "BYWK00"
-        }
-      ],
+      datasets: [],
       cmd: ""
     };
   },
@@ -63,38 +49,40 @@ export default {
   },
   methods: {
     getDsList() {
-      axios
-        .get("getDsList/", this.$route.query.dsn)
+      this.$http
+        .get("/sms/getdslist", this.$route.query.dsn)
         .then(res => {
-          this.datasets = res.data.datasets;
+          console.log("DslistPanel Get '/sms/getdslist' Success: ", res);
+          this.datasets = res.data.items;
+
+          for (let i = 0; i < this.datasets.length; i++)
+            this.datasets[i].key = i;
         })
         .catch(err => {
-          console.log("DslistPanel Get 'getDsList/' Error: ", err);
+          console.log("DslistPanel Get '/sms/getdslist' Error: ", err);
         });
     },
 
     Command(key) {
       // console.log(key, this.cmd)
       if (this.cmd.toUpperCase() == "D") {
-        // post ...
+        // TODO: delete 接口还不对...
+        this.$http
+          .delete("/sms/deletepds", this.datasets[key].dsname)
+          .then(res => {
+            console.log("DslistPanel Delete '/sms/deletepds' 请求成功：", res);
+            this.getDsList();
+          })
+          .catch(err => {
+            console.log("DslistPanel Delete '/sms/deletepds' 请求错误：", err);
+          });
       } else if (this.cmd.toUpperCase() == "E") {
-        // post ...
-        var type = 1; //0: 顺序 1: 分区
-        if (type == 0) {
-          this.$router.push({
-            path: "jcl",
-            query: {
-              dsn: this.datasets[key].dataset
-            }
-          });
-        } else if (type == 1) {
-          this.$router.push({
-            path: "pdslist",
-            query: {
-              dsn: this.datasets[key].dataset
-            }
-          });
-        }
+        this.$router.push({
+          path: "pdslist",
+          query: {
+            dsn: this.datasets[key].dsname
+          }
+        });
       }
     }
   }

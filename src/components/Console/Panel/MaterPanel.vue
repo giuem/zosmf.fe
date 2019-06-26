@@ -85,9 +85,9 @@ export default {
 
   methods: {
     routerTo(e) {
-      if (e.target.value === "p.3.2") {
+      if (e.target.value.toLowerCase() === "p.3.2") {
         this.$router.push({ name: "p32" });
-      } else if (e.target.value === "p.3.4") {
+      } else if (e.target.value.toLowerCase() === "p.3.4") {
         this.$router.push({ name: "p34" });
       } else {
         this.$router.push(e.target.value);
