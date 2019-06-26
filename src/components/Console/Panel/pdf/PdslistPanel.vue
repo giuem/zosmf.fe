@@ -19,11 +19,12 @@
       @keyup.enter="commandLine"
       v-model="cmdLine"
     />
+
+    <hr />
   </div>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "pdslist-panel",
   data() {
@@ -31,19 +32,8 @@ export default {
       columns: [
         {
           title: "Name",
-          dataIndex: "member"
-        },
-        {
-          title: "Size",
-          dataIndex: "size"
-        },
-        {
-          title: "Created",
-          dataIndex: "created"
-        },
-        {
-          title: "Changed",
-          dataIndex: "changed"
+          dataIndex: "member",
+          width: 400
         },
         {
           title: "Cmd",
@@ -61,24 +51,27 @@ export default {
   },
   methods: {
     getPdsMemList() {
-      axios
-        .get("/sms/getpdsmember", this.$route.query.dsn)
+      this.$http
+        .get("/sms/getpdsmemberlist", this.$route.query.dsn)
         .then(res => {
-          console.log("PdslistPanel Get '/sms/getpdsmember' Success: ", res);
+          console.log(
+            "PdslistPanel Get '/sms/getpdsmemberlist' Success: ",
+            res
+          );
           this.datasets = res.data.items;
           for (let i = 0; i < this.datasets.length; i++)
             this.datasets[i].key = i;
         })
         .catch(err => {
-          console.log("PdslistPanel Get '/sms/getpdsmember' Error: ", err);
+          console.log("PdslistPanel Get '/sms/getpdsmemberlist' Error: ", err);
         });
     },
 
     Command(key) {
       // console.log(key, this.cmd)
       if (this.cmd.toUpperCase() == "D") {
-        // delete ...
-        axios
+        // 删除数据集成员
+        this.$http
           .delete("/sms/deletepdsmember", {
             pdsMemName:
               this.$route.query.dsn + "(" + this.datasets[key].member + ")"
@@ -87,6 +80,9 @@ export default {
             console.log(
               "PdslistPanel Delete '/sms/deletepdsmember' 请求成功：",
               res
+            );
+            this.$message.success(
+              "Member " + this.datasets[key].member + " deleted"
             );
             this.getPdsMemList();
           })

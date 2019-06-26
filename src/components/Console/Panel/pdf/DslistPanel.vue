@@ -24,15 +24,8 @@ export default {
       columns: [
         {
           title: "Dataset",
-          dataIndex: "dsname"
-        },
-        {
-          title: "Message",
-          dataIndex: "message"
-        },
-        {
-          title: "Volume",
-          dataIndex: "volume"
+          dataIndex: "dsname",
+          width: 400
         },
         {
           title: "Cmd",
@@ -62,27 +55,57 @@ export default {
           console.log("DslistPanel Get '/sms/getdslist' Error: ", err);
         });
     },
-
+    dsType(dsname) {
+      this.$http
+        .get("/sms/getpdsmemberlist", dsname)
+        .then(res => {
+          console.log(
+            "PdslistPanel Get '/sms/getpdsmemberlist' Success: ",
+            res
+          );
+          if (res.data.status == 405) return 0;
+          // 请求成员错误，顺序数据集
+          else return 1; // 分区数据集
+        })
+        .catch(err => {
+          console.log("PdslistPanel Get '/sms/getpdsmemberlist' Error: ", err);
+        });
+    },
     Command(key) {
       // console.log(key, this.cmd)
       if (this.cmd.toUpperCase() == "D") {
-        // TODO: delete 接口还不对...
+        // 删除数据集（顺序和分区）
         this.$http
-          .delete("/sms/deletepds", this.datasets[key].dsname)
+          .delete("/sms/deleteds", this.datasets[key].dsname)
           .then(res => {
-            console.log("DslistPanel Delete '/sms/deletepds' 请求成功：", res);
+            console.log("DslistPanel Delete '/sms/deleteds' 请求成功：", res);
+            this.$message.success(
+              "Dataset " + this.datasets[key].dsname + " deleted"
+            );
             this.getDsList();
           })
           .catch(err => {
-            console.log("DslistPanel Delete '/sms/deletepds' 请求错误：", err);
+            console.log("DslistPanel Delete '/sms/deleteds' 请求错误：", err);
           });
       } else if (this.cmd.toUpperCase() == "E") {
-        this.$router.push({
-          path: "pdslist",
-          query: {
-            dsn: this.datasets[key].dsname
-          }
-        });
+        // 顺序数据集，进 JCL 面板
+        if (this.dsType(this.datasets[key].dsname) == 0) {
+          this.$router.push({
+            path: "jcl",
+            query: {
+              dsn: this.datasets[key].dsname
+            }
+          });
+        }
+        // 分区数据集，进成员列表面板
+        else {
+          this.$router.push({
+            path: "pdslist",
+            query: {
+              dsn: this.datasets[key].dsname
+            }
+          });
+        }
       }
     }
   }
