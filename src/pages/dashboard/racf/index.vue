@@ -4,7 +4,33 @@
       <LabContent :content="content" />
     </template>
     <template slot="right">
-      <div>TODO</div>
+      <LabReport :name="'步骤' + currentStep">
+        <Question :questions="questions" :step="currentStep" />
+        <div>
+          <span>
+            <a-button
+              style="margin-right: 10px"
+              :disabled="currentStep === 1"
+              @click="currentStep--"
+              >上一步</a-button
+            >
+            <a-button
+              :disabled="currentStep === questions.length - 1"
+              @click="currentStep++"
+              >下一步</a-button
+            >
+          </span>
+          <span style="float: right">
+            <a-button style="margin-right: 10px" type="primary">保存</a-button>
+            <a-button
+              type="primary"
+              html-type="submit"
+              :disabled="currentStep < questions.length - 1"
+              >提交</a-button
+            >
+          </span>
+        </div>
+      </LabReport>
       <a-divider />
       <Console />
     </template>
@@ -14,16 +40,21 @@
 <script>
 import LabLayout from "@/components/LabLayout";
 import LabContent from "@/components/LabContent";
-// import LabReport from "@/components/LabReport";
+import LabReport from "@/components/LabReport";
 import Console from "./components/Console";
+import Question from "./components/Question";
+
+import allQuestion from "./question.json";
+
 import Axios from "axios";
 
 export default {
   components: {
     LabLayout,
     LabContent,
-    // LabReport,
-    Console
+    LabReport,
+    Console,
+    Question
   },
 
   data() {
@@ -31,13 +62,17 @@ export default {
       content: "",
       result: "",
       currentStep: 1,
-      isSubmitLoading: false
+      isSubmitLoading: false,
+      allQuestion
     };
   },
 
   computed: {
     lab() {
       return this.$route.params.lab;
+    },
+    questions() {
+      return allQuestion[this.lab];
     }
   },
 
