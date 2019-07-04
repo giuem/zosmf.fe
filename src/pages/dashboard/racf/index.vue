@@ -5,7 +5,7 @@
     </template>
     <template slot="right">
       <LabReport :name="'步骤' + currentStep">
-        <Question :questions="questions" :step="currentStep" />
+        <Question ref="Question" :step="currentStep" :lower_lab="lower_lab" />
         <div>
           <span>
             <a-button
@@ -14,20 +14,21 @@
               @click="currentStep--"
               >上一步</a-button
             >
-            <a-button
-              :disabled="currentStep === questions.length - 1"
-              @click="currentStep++"
-              >下一步</a-button
-            >
+            <a-button @click="currentStep++">下一步</a-button>
           </span>
           <span style="float: right">
-            <a-button style="margin-right: 10px" type="primary">保存</a-button>
             <a-button
+              style="margin-right: 10px"
               type="primary"
-              html-type="submit"
-              :disabled="currentStep < questions.length - 1"
-              >提交</a-button
+              @click="saveCurrent"
+              >保存</a-button
             >
+            <a-button type="primary" @click="visible = true">提交</a-button>
+            <a-modal title="Basic Modal" v-model="visible" @ok="submitAll">
+              <p>提交报告后老师将可以看到</p>
+              <p>同时将不能再对答案进行更改。</p>
+              <p>确定提交报告吗</p>
+            </a-modal>
           </span>
         </div>
       </LabReport>
@@ -43,8 +44,6 @@ import LabContent from "@/components/LabContent";
 import LabReport from "@/components/LabReport";
 import Console from "./components/Console";
 import Question from "./components/Question";
-
-import allQuestion from "./question.json";
 
 import Axios from "axios";
 
@@ -63,16 +62,14 @@ export default {
       result: "",
       currentStep: 1,
       isSubmitLoading: false,
-      allQuestion
+      lower_lab: 1,
+      visible: false
     };
   },
 
   computed: {
     lab() {
       return this.$route.params.lab;
-    },
-    questions() {
-      return allQuestion[this.lab];
     }
   },
 
@@ -83,8 +80,8 @@ export default {
   watch: {
     lab(lab) {
       this.currentStep = 1;
+      this.lower_lab = parseInt(lab.split("lab")[1]);
       this.getDoc(lab);
-      this.getQuestions();
     }
   },
 
@@ -102,10 +99,11 @@ export default {
           }
         });
     },
-
-    getQuestions() {
-      this.lab;
-      this.currentStep;
+    saveCurrent() {
+      this.$refs.Question.saveCurrent();
+    },
+    submitAll() {
+      this.$refs.Question.submitAll();
     }
   }
 };
