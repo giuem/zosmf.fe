@@ -28,16 +28,44 @@ const router = new Router({
           component: () => import("@/pages/dashboard/reports")
         },
         {
-          path: "racf/demo",
-          component: () => import("@/pages/dashboard/racf/demo")
+          path: "racf/:lab",
+          component: () => import("@/pages/dashboard/racf")
         },
         {
-          path: "racf/intro",
-          component: () => import("@/pages/dashboard/racf/intro")
+          path: "dfsms/demo",
+          component: () => import("@/pages/dashboard/dfsms/demo")
         },
         {
-          path: "racf/lab1",
-          component: () => import("@/pages/dashboard/racf/lab1")
+          path: "dfsms/intro",
+          component: () => import("@/pages/dashboard/dfsms/intro")
+        },
+        {
+          path: "dfsms/lab1",
+          component: () => import("@/pages/dashboard/dfsms/lab1")
+        },
+        {
+          path: "dfsms/lab2",
+          component: () => import("@/pages/dashboard/dfsms/lab2")
+        },
+        {
+          path: "dfsms/lab3",
+          component: () => import("@/pages/dashboard/dfsms/lab3")
+        },
+        {
+          path: "dfsms/lab4",
+          component: () => import("@/pages/dashboard/dfsms/lab4")
+        },
+        {
+          path: "dfsms/lab5",
+          component: () => import("@/pages/dashboard/dfsms/lab5")
+        },
+        {
+          path: "dfsms/lab6",
+          component: () => import("@/pages/dashboard/dfsms/lab6")
+        },
+        {
+          path: "dfsms/lab7",
+          component: () => import("@/pages/dashboard/dfsms/lab7")
         }
       ]
     },

@@ -1,0 +1,31 @@
+### 登录
+POST http://139.199.75.41:3000/mock/14/login
+Content-Type: application/json
+
+{
+  "account": "st021",
+  "password": "1234",
+  "address": "10.60.43.8:8800"
+}
+
+### 获取登录状态
+GET http://139.199.75.41:3000/mock/14/login
+
+### 退出登录
+DELETE http://139.199.75.41:3000/mock/14/logoff
+
+### 执行RACF命令 -- 参数?
+PUT http://139.199.75.41:3000/mock/14/racf
+
+### 新建user
+POST http://139.199.75.41:3000/mock/14/racf/users
+Content-Type: application/json
+
+{
+  "userid":"st007",
+  "owner": "STGRP",
+  "dfltgrp":"STGRP",
+  "authority": ""	,
+  "name": "",
+  "password": "",
+}
