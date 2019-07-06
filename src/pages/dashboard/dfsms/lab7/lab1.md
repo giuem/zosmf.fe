@@ -1,29 +1,37 @@
-# 实验一 创建组 RACF 实验
+# 实验8：复制/移动/删除数据集实验
 
-## 步骤1 设计和制定组的结构
+**实验目的：** 练习使用ISMF命令
 
-一般情况下，需要设计以下几类组，如图示
-* Administrator Group 管理组:用于管理全部用户的组，命名为 DIVxxADM
-* Function Group功能组:用于实现资源访问控制的组，可以通过这些组给组员访问某种资源(如 数据集)的权限
-* Data Control Group 数据控制组(又称资源组):这些组的名字需要和数据集的 HLQ 相同，这些 数据集成为组的数据集
-* 另外一些组用于将权限下放(Delegation)
+**实验结果：** 实验后，学生应该掌握
 
-![](/img/racf/lab1/step1.png)
+- 如何使用FILTER和SORT命令
+- 在数据集列表中如何针对某个数据集执行ISMF的行命令
+- 在数据集列表中如何针对所有数据集执行ISMF的主命令
 
-## 步骤2 以RACFLAB组管理员身份登陆TSO
+**实验介绍：**
 
-* 以 yourid 用户身份登陆 TSO/ISPF，初始密码为 TJ2016，第一次登陆需要修改密码
-* 如果执行 RACF 命令，请选择‘6’OPTION
-* 如果使用 RACF 控制面板，请选择‘R’OPTION
-* 使用 `LU` RACF 命令或者 RACF 控制面板查看 yourid 的属性
+**实验要求：** 完成实验报告
 
-## 步骤3 在RACFLAB之下定义子组
+## 实验步骤
 
-* 请首先参考步骤 1 的组结构
-* 然后利用 RACF 命令或者 RACF 面板定义以下子组，请思考应该指定谁为子组的 OWNER。
+**步骤 1**  复制单个数据集，HLQ改为你自己的User ID。
+  
+![img](/img/dfsms/lab7/step1.png)
 
-> 提示：ADDGROUP
+**步骤 2**  复制单个数据集，随意命名新的数据集。
+  
+![img](/img/dfsms/lab7/step2.png)
 
-## 步骤4
+**步骤 3**  复制多个数据集，HLQ改为你自己的User ID。
+  
+![img](/img/dfsms/lab7/step3.png)
 
-...
+**步骤 4**  移动单个数据集 
+
+![img](/img/dfsms/lab7/step4.png)
+
+**步骤 5**  删除多个数据集
+  
+![img](/img/dfsms/lab7/step5.png)
+
+**步骤 6**  总结本次实验体会及建议

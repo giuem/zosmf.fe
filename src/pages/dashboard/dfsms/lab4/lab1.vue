@@ -4,38 +4,38 @@
       <LabContent :content="content" />
     </template>
     <template slot="right">
-      <LabReport name="步骤 1">
+      <LabReport :name="'步骤 ' + steps[currentStepIndex]">
         <a-form type="vertical" @submit="handleSubmit">
-          <a-form-item label="What groups are you connected to?" :colon="false">
-            <a-input></a-input>
-          </a-form-item>
-          <a-form-item label="Do you have any user attributes?" :colon="false">
-            <a-input></a-input>
-          </a-form-item>
           <a-form-item
-            label="Do you have some class authorization?"
+            v-for="(question, index) in questions"
+            :key="index"
+            :label="question.question"
             :colon="false"
           >
-            <a-input></a-input>
-          </a-form-item>
-          <a-form-item
-            label="Do you have any connect attributes to RACFLAB?"
-            :colon="false"
-          >
-            <a-input></a-input>
+            <a-input v-model="question.answer"></a-input>
           </a-form-item>
           <div>
             <span>
-              <a-button style="margin-right: 10px" disabled>上一步</a-button>
-              <a-button>下一步</a-button>
+              <a-button
+                @click="currentStepIndex -= 1"
+                :disabled="currentStepIndex === 0"
+                style="margin-right: 10px"
+                >上一步</a-button
+              >
+              <a-button
+                @click="currentStepIndex += 1"
+                :disabled="currentStepIndex === steps.length - 1"
+                >下一步</a-button
+              >
             </span>
             <span style="float: right">
-              <a-button style="margin-right: 10px" type="primary">
-                保存
-              </a-button>
-              <a-button type="primary" html-type="submit">
-                提交
-              </a-button>
+              <a-button
+                style="margin-right: 10px"
+                type="primary"
+                @click="handleSubmit($event, 1)"
+                >保存</a-button
+              >
+              <a-button type="primary" html-type="submit">提交</a-button>
             </span>
           </div>
         </a-form>
@@ -47,10 +47,11 @@
 </template>
 
 <script>
+import axios from "axios";
 import LabLayout from "@/components/LabLayout";
 import LabContent from "@/components/LabContent";
 import LabReport from "@/components/LabReport";
-import Console from "@/components/Console";
+import Console from "@/components/Console/SMSConsole";
 import content from "./lab1.md";
 
 export default {
@@ -62,14 +63,58 @@ export default {
   },
   data() {
     return {
-      content
+      content,
+      labid: 4,
+      currentStepIndex: 0,
+      steps: [6, 7],
+      questions: []
     };
   },
-
+  created() {
+    this.getQandA();
+  },
   methods: {
-    handleSubmit(e) {
+    getQandA() {
+      let reqBody = {
+        lab: "SMS",
+        lower_lab: this.labid,
+        step: this.steps[this.currentStepIndex]
+      };
+
+      axios
+        .post(`/api/db/getQuestions`, reqBody)
+        .then(res => {
+          // console.log(res);
+          this.questions = res.data.map(q => {
+            q.lab = "SMS";
+            q.lower_lab = this.labid;
+            q.step = this.steps[this.currentStepIndex];
+            q.answer = "";
+            return q;
+          });
+          axios
+            .post(`/api/db/getdraft`, reqBody)
+            .then(res => {
+              let answers = res.data;
+              answers.forEach(a => {
+                this.questions.find(
+                  q => q.question_id === a.question_id
+                ).answer = a.answer;
+              });
+            })
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+    },
+    handleSubmit(e, isDraft) {
       e.preventDefault();
+      this.$emit("saveOrSubmit", isDraft, this.questions);
       console.log("form submit");
+    }
+  },
+  watch: {
+    currentStepIndex: function() {
+      this.getQandA();
     }
   }
 };

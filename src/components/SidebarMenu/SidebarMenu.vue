@@ -1,23 +1,23 @@
 <template>
-  <a-menu
-    theme="dark"
-    mode="inline"
-    @click="handleMenuClick"
-    :selectedKeys="selectedKeys"
-    :defaultOpenKeys="defaultOpenKeys"
-  >
-    <a-sub-menu v-for="menu in menuConfig" :key="'/dashboard/' + menu.path">
-      <span slot="title">
-        <a-icon :type="menu.icon" /><span>{{ menu.name }}</span>
-      </span>
-      <a-menu-item
-        v-for="submenu in menu.children"
-        :key="'/dashboard/' + menu.path + '/' + submenu.path"
-      >
-        {{ submenu.name }}
-      </a-menu-item>
-    </a-sub-menu>
-  </a-menu>
+  <div class="menu-container">
+    <a-menu
+      theme="dark"
+      mode="inline"
+      @click="handleMenuClick"
+      :selectedKeys="selectedKeys"
+      :defaultOpenKeys="defaultOpenKeys"
+    >
+      <a-sub-menu v-for="menu in menuConfig" :key="'/dashboard/' + menu.path">
+        <span slot="title">
+          <a-icon :type="menu.icon" />
+          <span>{{ menu.name }}</span>
+        </span>
+        <a-menu-item v-for="submenu in menu.children" :key="submenu.path">{{
+          submenu.name
+        }}</a-menu-item>
+      </a-sub-menu>
+    </a-menu>
+  </div>
 </template>
 
 <script>
@@ -44,8 +44,19 @@ export default {
   },
   methods: {
     handleMenuClick(e) {
-      this.$router.push(e.key);
+      if (e.keyPath[1] === "/dashboard/dfsms") {
+        this.$router.push({ name: "lab", params: { lab: e.key } });
+      } else {
+        this.$router.push(e.keyPath[1] + "/" + e.key);
+      }
     }
   }
 };
 </script>
+
+<style scoped>
+.menu-container {
+  height: 92%;
+  overflow: auto;
+}
+</style>
