@@ -66,7 +66,7 @@ export default {
           answer: _this.drafts[index]
         };
       });
-      console.log(QAarray);
+
       Axios.post("/api/db/subAnswer", QAarray)
         .then(response => {
           if (response.data.error === "OK") {
@@ -100,12 +100,14 @@ export default {
       // 每次获取到问题的时候就获取一下草稿
       let _this = this;
       _this.drafts = [];
+      let params = {
+        lab: "RACF",
+        lower_lab: this.lower_lab,
+        step: this.step
+      };
+
       try {
-        Axios.post("/api/db/getdraft", {
-          lab: "RACF",
-          lower_lab: this.lower_lab,
-          step: this.step
-        }).then(response => {
+        Axios.post("/api/db/getdraft", params).then(response => {
           if (response.data.errcode != 404) {
             response.data.forEach(element => {
               _this.drafts.push(element.answer);
@@ -140,14 +142,14 @@ export default {
     this.getquestion();
   },
   watch: {
+    questionsInStep() {
+      // 更换 step 的时候获取问题
+      this.getdraft();
+    },
     step() {
       // 更换 step 的时候获取问题
       this.getquestion();
       this.drafts = [];
-    },
-    questionsInStep() {
-      // 更换 step 的时候获取问题
-      this.getdraft();
     },
     lower_lab() {
       // 更换 lower_lab 的时候获取问题

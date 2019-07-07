@@ -45,7 +45,7 @@ export default {
         this.isLoading = true;
         try {
           const response = await Axios.post("/api/racf/inputCommand", values);
-          this.result = response.data;
+          this.result = response.data.sysprint;
         } catch (error) {
           this.$message.error("服务器错误");
         } finally {

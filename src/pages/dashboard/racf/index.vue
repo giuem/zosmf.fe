@@ -24,7 +24,7 @@
               >保存</a-button
             >
             <a-button type="primary" @click="visible = true">提交</a-button>
-            <a-modal title="Basic Modal" v-model="visible" @ok="submitAll">
+            <a-modal title="确认提交？" v-model="visible" @ok="submitAll">
               <p>提交报告后老师将可以看到</p>
               <p>同时将不能再对答案进行更改。</p>
               <p>确定提交报告吗</p>
