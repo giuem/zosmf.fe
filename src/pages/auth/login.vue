@@ -40,8 +40,7 @@
             }
           ]"
           size="large"
-          type="password"
-          placeholder="请输入 zOS 主机地址"
+          placeholder="10.60.43.8:8800"
         >
           <a-icon slot="prefix" type="cloud" />
         </a-input>
