@@ -45,6 +45,8 @@ import LabReport from "@/components/LabReport";
 import Console from "./components/Console";
 import Question from "./components/Question";
 
+import allQuestion from "./question.json";
+
 import Axios from "axios";
 
 export default {
@@ -70,6 +72,9 @@ export default {
   computed: {
     lab() {
       return this.$route.params.lab;
+    },
+    questions() {
+      return allQuestion[this.lab];
     }
   },
 
