@@ -28,10 +28,6 @@ const router = new Router({
           component: () => import("@/pages/dashboard/reports")
         },
         {
-          path: "racf/intro",
-          component: () => import("@/pages/dashboard/racf/intro")
-        },
-        {
           path: "rexx/intro",
           component: () => import("@/pages/dashboard/rexx/intro")
         },
