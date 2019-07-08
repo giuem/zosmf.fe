@@ -46,6 +46,15 @@ export default [
     name: "脚本语言（REXX）",
     path: "rexx",
     icon: "snippets",
-    children: []
+    children: [
+      { name: "实验介绍", path: "intro" },
+      { name: "实验 1 REXX 基础实验", path: "lab1" },
+      { name: "实验 2 REXX 函数实验", path: "lab2" },
+      { name: "实验 3 REXX 程序间调用实验 I", path: "lab3" },
+      { name: "实验 4 REXX 程序间调用实验 II", path: "lab4" },
+      { name: "实验 5 构建并提交 JCL 实验", path: "lab5" },
+      { name: "实验 6 显示数据集信息实验", path: "lab6" },
+      { name: "实验 7 综合实验", path: "lab7" }
+    ]
   }
 ];
