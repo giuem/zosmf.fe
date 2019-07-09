@@ -5,7 +5,9 @@ import store from "./store";
 import "./registerServiceWorker";
 import "./plugins/ant-design-vue.js";
 import axios from "axios";
+import VueResource from "vue-resource";
 
+Vue.use(VueResource);
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
 Vue.directive("focus", {
