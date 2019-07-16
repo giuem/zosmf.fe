@@ -127,6 +127,46 @@ const router = new Router({
                 import("@/components/Console/Panel/pdf/PdslistPanel")
             }
           ]
+        },
+        {
+          path: "catalog/intro",
+          component: () => import("@/pages/dashboard/catalog/intro")
+        },
+        {
+          path: "catalog/lab1",
+          component: () => import("@/pages/dashboard/catalog/lab1")
+        },
+        {
+          path: "catalog/lab2",
+          component: () => import("@/pages/dashboard/catalog/lab2")
+        },
+        {
+          path: "catalog/lab3",
+          component: () => import("@/pages/dashboard/catalog/lab3")
+        },
+        {
+          path: "catalog/lab4",
+          component: () => import("@/pages/dashboard/catalog/lab4")
+        },
+        {
+          path: "catalog/lab5",
+          component: () => import("@/pages/dashboard/catalog/lab5")
+        },
+        {
+          path: "catalog/lab6",
+          component: () => import("@/pages/dashboard/catalog/lab6")
+        },
+        {
+          path: "catalog/lab7",
+          component: () => import("@/pages/dashboard/catalog/lab7")
+        },
+        {
+          path: "catalog/lab8",
+          component: () => import("@/pages/dashboard/catalog/lab8")
+        },
+        {
+          path: "catalog/lab9",
+          component: () => import("@/pages/dashboard/catalog/lab9")
         }
       ]
     },

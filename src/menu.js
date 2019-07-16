@@ -34,7 +34,18 @@ export default [
     name: "目录管理（Catalog）",
     path: "catalog",
     icon: "inbox",
-    children: []
+    children: [
+      { name: "实验介绍", path: "intro" },
+      { name: "实验 1：创建用户编目（User Catalog）实验", path: "lab1" },
+      { name: "实验 2：创建别名实验", path: "lab2" },
+      { name: "实验 3：查看数据集所属的Catalog实验", path: "lab3" },
+      { name: "实验 4：连接和断开Catalog实验", path: "lab4" },
+      { name: "实验 5：查看VVDS内容实验", path: "lab5" },
+      { name: "实验 6：查看VTOC内容实验", path: "lab6" },
+      { name: "实验 7：查看所有别名和用户编目实验", path: "lab7" },
+      { name: "实验 8：提交实验报告", path: "lab8" },
+      { name: "实验 9： 删除用户编目（User Catalog）实验", path: "lab9" }
+    ]
   },
   {
     name: "系统命令（MVS）",
