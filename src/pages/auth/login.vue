@@ -91,6 +91,7 @@ export default {
 
       try {
         const user = this.form.getFieldsValue();
+        user.teacherPass = this.form.getFieldsValue().password;
         const response = await Axios.post("/api/login", user);
         switch (response.status) {
           case 200:

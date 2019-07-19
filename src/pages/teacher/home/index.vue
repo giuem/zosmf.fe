@@ -2,7 +2,7 @@
   <div class="teacher-home">
     <h1>总览</h1>
     <a-list class="overview-list" itemLayout="horizontal" :dataSource="data">
-      <a-list-item slot="renderItem" slot-scope="item, index">
+      <a-list-item slot="renderItem" slot-scope="item">
         <!-- <a slot="actions">edit</a> -->
         <a slot="actions" :href="`/teacher/${item.path}`">查看详情</a>
         <a-list-item-meta
@@ -53,6 +53,22 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    this.data.map(lab => {
+      this.$http
+        .get(`/api/db/submitted`, {
+          params: {
+            lab: lab.path.toUpperCase()
+          }
+        })
+        .then(res => {
+          console.log("GET /db/submitted", res);
+          lab.submit = res.body.length;
+        });
+      // this.$http.get(`/api/db/getStudents`)
+    });
+    // this.$http.get(`/api/db/getStudents`)
   }
 };
 </script>
