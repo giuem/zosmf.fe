@@ -29,7 +29,17 @@
         <a-button icon="download">下载</a-button>
       </span>
     </a-table>
+
     <!-- <a-pagination v-model="curPage" :total="total" /> -->
+    <pdf
+      v-for="i in numPages"
+      :key="i"
+      :src="src"
+      :page="i"
+      style="display: inline-block; width: 25%"
+    ></pdf>
+
+    <embed :src="src" type="application/pdf" width="800px" height="800px" />
   </div>
 </template>
 
@@ -51,12 +61,15 @@ export default {
     return {
       data: [],
       loading: false,
-      columns
+      columns,
+      src: undefined,
+      numPages: undefined
     };
   },
   created() {
     this.fetch();
   },
+  mounted() {},
   watch: {
     $route() {
       this.fetch();
@@ -78,10 +91,14 @@ export default {
     },
     review(record) {
       this.$http
-        .post(`/api/db/downloadPDF`, {
-          uid: record.uid,
-          lab: this.$route.params.name.toUpperCase()
-        })
+        .post(
+          `/api/db/downloadPDF`,
+          {
+            uid: record.uid,
+            lab: this.$route.params.name.toUpperCase()
+          },
+          { responseType: "arraybuffer" }
+        )
         .then(res => {
           console.log("POST /db/downloadPDF", res);
           let binaryData = [];
@@ -89,7 +106,7 @@ export default {
           let url = window.URL.createObjectURL(
             new Blob(binaryData, { type: "application/pdf" })
           );
-          console.log(url);
+          this.src = url;
         });
     }
   },
