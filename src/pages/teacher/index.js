@@ -6,13 +6,18 @@ export default {
   component: TeacherLayout,
   children: [
     {
-      name: "teach-home",
       path: "home",
+      name: "teach-home",
       component: () => import("./home")
     },
     {
-      name: "details",
+      path: "check",
+      name: "teach-check",
+      component: () => import("./check")
+    },
+    {
       path: ":name",
+      name: "details",
       component: () => import("./detail")
     }
   ]

@@ -31,15 +31,6 @@
     </a-table>
 
     <!-- <a-pagination v-model="curPage" :total="total" /> -->
-    <pdf
-      v-for="i in numPages"
-      :key="i"
-      :src="src"
-      :page="i"
-      style="display: inline-block; width: 25%"
-    ></pdf>
-
-    <embed :src="src" type="application/pdf" width="800px" height="800px" />
   </div>
 </template>
 
@@ -62,7 +53,6 @@ export default {
       data: [],
       loading: false,
       columns,
-      src: undefined,
       numPages: undefined
     };
   },
@@ -106,7 +96,13 @@ export default {
           let url = window.URL.createObjectURL(
             new Blob(binaryData, { type: "application/pdf" })
           );
-          this.src = url;
+          this.$router.push({
+            name: "teach-check",
+            params: {
+              url: url,
+              uid: record.uid
+            }
+          });
         });
     }
   },
