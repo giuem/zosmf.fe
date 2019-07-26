@@ -26,15 +26,17 @@
           </span>
         </a>
         <a-divider type="vertical" />
-        <a-button icon="download">下载</a-button>
+        <a-button icon="download" @click="downloadPDF(record)">下载</a-button>
       </span>
     </a-table>
-
+    <a :href="url" :download="disposition" ref="downloadHref"></a>
     <!-- <a-pagination v-model="curPage" :total="total" /> -->
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 const columns = [
   { title: "TSO ID", dataIndex: "uid", key: "uid" },
   { title: "实验状态", key: "status", scopedSlots: { customRender: "status" } },
@@ -50,10 +52,13 @@ const columns = [
 export default {
   data() {
     return {
+      lab: this.$route.params.name,
       data: [],
       loading: false,
       columns,
-      numPages: undefined
+      numPages: undefined,
+      disposition: "",
+      url: ""
     };
   },
   created() {
@@ -66,12 +71,13 @@ export default {
     }
   },
   methods: {
+    ...mapMutations("report", ["save"]),
     fetch() {
       this.loading = true;
       this.$http
         .get(`/api/db/submitted`, {
           params: {
-            lab: this.$route.params.name.toUpperCase()
+            lab: this.lab.toUpperCase()
           }
         })
         .then(data => {
@@ -79,31 +85,48 @@ export default {
           this.data = data.body;
         });
     },
-    review(record) {
-      this.$http
-        .post(
-          `/api/db/downloadPDF`,
-          {
-            uid: record.uid,
-            lab: this.$route.params.name.toUpperCase()
-          },
-          { responseType: "arraybuffer" }
-        )
-        .then(res => {
-          console.log("POST /db/downloadPDF", res);
-          let binaryData = [];
-          binaryData.push(res.body);
-          let url = window.URL.createObjectURL(
-            new Blob(binaryData, { type: "application/pdf" })
-          );
-          this.$router.push({
-            name: "teach-check",
-            params: {
-              url: url,
-              uid: record.uid
-            }
+    getPDF(record) {
+      return new Promise(resolve => {
+        this.$http
+          .post(
+            `/api/db/downloadPDF`,
+            {
+              uid: record.uid,
+              lab: this.lab.toUpperCase()
+            },
+            { responseType: "arraybuffer" }
+          )
+          .then(res => {
+            console.log("POST /db/downloadPDF", res);
+            this.disposition = res.headers.map["content-disposition"][0]
+              .split("=")[1]
+              .replace(/\"/g, "");
+            console.log(this.disposition);
+            let binaryData = [];
+            binaryData.push(res.body);
+            this.url = window.URL.createObjectURL(
+              new Blob(binaryData, {
+                type: "application/pdf"
+              })
+            );
+            this.save({
+              ...record,
+              lab: this.lab,
+              url: this.url
+            });
+            resolve();
           });
-        });
+      });
+    },
+    review(record) {
+      this.getPDF(record).then(() => {
+        this.$router.push({ name: "teach-check" });
+      });
+    },
+    downloadPDF(record) {
+      this.getPDF(record).then(() => {
+        this.$refs.downloadHref.click();
+      });
     }
   },
   filters: {

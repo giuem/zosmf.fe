@@ -3,6 +3,7 @@ import TeacherLayout from "@/layouts/teacherLayout";
 export default {
   name: "teacher",
   path: "/teacher",
+  redirect: "/teacher/home",
   component: TeacherLayout,
   children: [
     {
