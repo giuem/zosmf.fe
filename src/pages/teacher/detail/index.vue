@@ -100,7 +100,7 @@ export default {
             console.log("POST /db/downloadPDF", res);
             this.disposition = res.headers.map["content-disposition"][0]
               .split("=")[1]
-              .replace(/\"/g, "");
+              .replace(/"/g, "");
             console.log(this.disposition);
             let binaryData = [];
             binaryData.push(res.body);

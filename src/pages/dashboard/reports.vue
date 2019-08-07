@@ -3,7 +3,8 @@
     <h1>我的实验报告</h1>
     <a-table :columns="columns" :dataSource="data" rowKey="name">
       <span slot="status"> <a-badge status="success" />已提交 </span>
-      <span slot="action" slot-scope="text, record">
+      <!-- <span slot="action" slot-scope="text, record"> -->
+      <span slot="action">
         <a href="javascript:;"> <a-icon type="eye" />&nbsp;预览 </a>
         <a-divider type="vertical" />
         <a href="javascript:;"> <a-icon type="download" />&nbsp;下载 </a>
