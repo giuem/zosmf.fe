@@ -52,9 +52,8 @@
           size="large"
           block
           :loading="isLoading"
+          >登录</a-button
         >
-          登录
-        </a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -91,12 +90,19 @@ export default {
 
       try {
         const user = this.form.getFieldsValue();
+        user.teacherPass = this.form.getFieldsValue().password;
         const response = await Axios.post("/api/login", user);
         switch (response.status) {
-          case 200:
+          case 200: {
             this.$store.dispatch("user/login", user);
+            const loginState = await Axios.get("/api/login");
+            if (loginState.data.role === "teacher") {
+              this.$router.push("/teacher");
+              return;
+            }
             this.$router.push("/");
             return;
+          }
           case 401:
             Modal.error({
               title: "登录失败",

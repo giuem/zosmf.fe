@@ -8,6 +8,7 @@ import DashBoardLayout from "@/layouts/dashboard.vue";
 import AuthLayout from "@/layouts/auth.vue";
 
 // import pages
+import teacher from "@/pages/teacher";
 
 Vue.use(Router);
 
@@ -170,6 +171,7 @@ const router = new Router({
         }
       ]
     },
+    teacher,
     {
       path: "/auth",
       component: AuthLayout,
